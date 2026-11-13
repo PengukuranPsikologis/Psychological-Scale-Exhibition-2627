@@ -1,0 +1,3627 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Body Perception and Lifestyle Behaviours | Psychological Scale Exhibition</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+
+            --blue: #1464c4;
+            --blue-dark: #07578d;
+            --blue-deep: #075487;
+            --blue-soft: #dfeefa;
+
+            --ink: #111111;
+            --white: #ffffff;
+
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            width: 100%;
+
+        }
+
+
+        body {
+
+            width: 100%;
+            min-height: 100vh;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            color:
+                var(--ink);
+
+            background-color:
+                #eef6fc;
+
+            background-image:
+                linear-gradient(
+                    rgba(244, 249, 253, 0.42),
+                    rgba(244, 249, 253, 0.42)
+                ),
+                url("assets/background.png");
+
+            background-size:
+                cover;
+
+            background-position:
+                center;
+
+            background-attachment:
+                fixed;
+
+            overflow-x:
+                hidden;
+
+        }
+
+
+        body.menu-open,
+        body.modal-open {
+
+            overflow:
+                hidden;
+
+        }
+
+
+        button,
+        a {
+
+            font-family:
+                inherit;
+
+        }
+
+
+        /* =====================================================
+           MAIN PAGE
+        ====================================================== */
+
+        .tema-page {
+
+            width:
+                100%;
+
+            min-height:
+                100vh;
+
+            padding:
+                65px 8% 100px;
+
+            position:
+                relative;
+
+        }
+
+
+        /* =====================================================
+           HAMBURGER BUTTON
+        ====================================================== */
+
+        .menu-button {
+
+            position:
+                fixed;
+
+            top:
+                38px;
+
+            left:
+                30px;
+
+            width:
+                64px;
+
+            height:
+                48px;
+
+            padding:
+                4px 0;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            cursor:
+                pointer;
+
+            z-index:
+                1200;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+
+        }
+
+
+        /* =====================================================
+           FULL-WIDTH PROTECTION
+
+           Protection ini hanya aktif ketika hamburger
+           bertabrakan dengan content saat scrolling.
+        ====================================================== */
+
+        .menu-button::before {
+
+            content:
+                "";
+
+            position:
+                fixed;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            width:
+                100vw;
+
+            height:
+                105px;
+
+            background:
+                #eef6fc;
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            backdrop-filter:
+                blur(10px);
+
+            -webkit-backdrop-filter:
+                blur(10px);
+
+            z-index:
+                -1;
+
+            pointer-events:
+                none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+
+        }
+
+
+        /* =====================================================
+           PROTECTION FADE
+        ====================================================== */
+
+        .menu-button::after {
+
+            content:
+                "";
+
+            position:
+                fixed;
+
+            top:
+                105px;
+
+            left:
+                0;
+
+            width:
+                100vw;
+
+            height:
+                35px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #eef6fc,
+                    rgba(
+                        238,
+                        246,
+                        252,
+                        0
+                    )
+                );
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            z-index:
+                -1;
+
+            pointer-events:
+                none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+
+        }
+
+
+        /* =====================================================
+           PROTECTION ACTIVE
+        ====================================================== */
+
+        .menu-button.is-obscured::before {
+
+            opacity:
+                0.97;
+
+            visibility:
+                visible;
+
+        }
+
+
+        .menu-button.is-obscured::after {
+
+            opacity:
+                0.95;
+
+            visibility:
+                visible;
+
+        }
+
+
+        /* =====================================================
+           HAMBURGER LINES
+        ====================================================== */
+
+        .menu-button span {
+
+            width:
+                64px;
+
+            height:
+                5px;
+
+            background:
+                var(--blue-deep);
+
+            border-radius:
+                0;
+
+            display:
+                block;
+
+            transition:
+                transform 0.35s ease,
+                opacity 0.25s ease,
+                background 0.25s ease;
+
+        }
+
+
+        /* =====================================================
+           HAMBURGER → X
+        ====================================================== */
+
+        .menu-button.active
+        span:nth-child(1) {
+
+            transform:
+                translateY(17px)
+                rotate(45deg);
+
+            background:
+                var(--white);
+
+        }
+
+
+        .menu-button.active
+        span:nth-child(2) {
+
+            opacity:
+                0;
+
+        }
+
+
+        .menu-button.active
+        span:nth-child(3) {
+
+            transform:
+                translateY(-17px)
+                rotate(-45deg);
+
+            background:
+                var(--white);
+
+        }
+
+
+        /* =====================================================
+           POSTER MODAL OPEN
+           
+           Saat poster dibuka:
+           - hamburger hilang
+           - hamburger tidak bisa diklik
+           - protection hilang
+        ====================================================== */
+
+        body.modal-open .menu-button {
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        body.modal-open
+        .menu-button::before,
+
+        body.modal-open
+        .menu-button::after {
+
+            opacity:
+                0 !important;
+
+            visibility:
+                hidden !important;
+
+        }
+
+
+        body.modal-open
+        .menu-button.is-obscured {
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .header {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                65px;
+
+        }
+
+
+        /* =====================================================
+           SMALL BACK LINK
+        ====================================================== */
+
+        .back-button {
+
+            color:
+                var(--ink);
+
+            text-decoration:
+                none;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    15px,
+                    1.3vw,
+                    20px
+                );
+
+            font-weight:
+                600;
+
+            margin-bottom:
+                20px;
+
+            padding:
+                5px 10px;
+
+            position:
+                relative;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease;
+
+        }
+
+
+        .back-button::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                10px;
+
+            right:
+                10px;
+
+            bottom:
+                0;
+
+            height:
+                2px;
+
+            background:
+                var(--ink);
+
+            transform:
+                scaleX(0);
+
+            transition:
+                transform 0.3s ease;
+
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            opacity:
+                0.75;
+
+        }
+
+
+        .back-button:hover::after {
+
+            transform:
+                scaleX(1);
+
+        }
+
+
+        /* =====================================================
+           TEMA TITLE
+        ====================================================== */
+
+        .header h1 {
+
+            font-family:
+                'League Spartan',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    65px,
+                    7vw,
+                    100px
+                );
+
+            font-weight:
+                800;
+
+            line-height:
+                0.9;
+
+            letter-spacing:
+                -4px;
+
+            color:
+                var(--blue);
+
+        }
+
+
+        /* =====================================================
+           TEMA DESCRIPTION
+        ====================================================== */
+
+        .header .theme-description {
+
+            max-width:
+                1200px;
+
+            margin-top:
+                22px;
+
+            color:
+                var(--ink);
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    17px,
+                    1.6vw,
+                    27px
+                );
+
+            font-weight:
+                500;
+
+            font-style:
+                italic;
+
+            line-height:
+                1.15;
+
+            text-align:
+                center;
+
+        }
+
+
+        /* =====================================================
+           POSTER GRID
+        ====================================================== */
+
+        .poster-grid {
+
+            width:
+                100%;
+
+            max-width:
+                1400px;
+
+            margin:
+                0 auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            column-gap:
+                12%;
+
+            row-gap:
+                65px;
+
+            align-items:
+                start;
+
+        }
+
+
+        /* =====================================================
+           POSTER ITEM
+        ====================================================== */
+
+        .poster-item {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            text-align:
+                center;
+
+        }
+
+
+        /* =====================================================
+           POSTER BUTTON
+        ====================================================== */
+
+        .poster-button {
+
+            border:
+                none;
+
+            padding:
+                0;
+
+            background:
+                transparent;
+
+            cursor:
+                pointer;
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-width:
+                330px;
+
+            transition:
+                transform 0.35s ease;
+
+        }
+
+
+        /* =====================================================
+           POSTER IMAGE
+        ====================================================== */
+
+        .poster-button img {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            height:
+                auto;
+
+            aspect-ratio:
+                0.75 / 1;
+
+            object-fit:
+                cover;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                filter 0.35s ease;
+
+        }
+
+
+        /* =====================================================
+           POSTER HOVER
+        ====================================================== */
+
+        .poster-button:hover {
+
+            transform:
+                translateY(-8px);
+
+        }
+
+
+        .poster-button:hover img {
+
+            transform:
+                scale(1.025);
+
+            box-shadow:
+                0 18px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.30
+                );
+
+            filter:
+                brightness(1.05);
+
+        }
+
+
+        /* =====================================================
+           POSTER TITLE
+        ====================================================== */
+
+        .poster-title {
+
+            margin-top:
+                25px;
+
+            border:
+                none;
+
+            padding:
+                5px 10px;
+
+            background:
+                transparent;
+
+            color:
+                var(--ink);
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    16px,
+                    1.6vw,
+                    27px
+                );
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                7px;
+
+            text-decoration:
+                underline;
+
+            text-underline-offset:
+                5px;
+
+            cursor:
+                pointer;
+
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease,
+                letter-spacing 0.3s ease;
+
+        }
+
+
+        .poster-title:hover {
+
+            transform:
+                translateY(-3px);
+
+            opacity:
+                0.8;
+
+            letter-spacing:
+                9px;
+
+        }
+
+
+        /* =====================================================
+           POSTER DESCRIPTION
+        ====================================================== */
+
+        .poster-description {
+
+            display:
+                grid;
+
+            grid-template-rows:
+                0fr;
+
+            width:
+                100%;
+
+            max-width:
+                330px;
+
+            margin-top:
+                0;
+
+            opacity:
+                0;
+
+            overflow:
+                hidden;
+
+            transition:
+                grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin-top 0.45s ease;
+
+        }
+
+
+        .poster-description p {
+
+            min-height:
+                0;
+
+            overflow:
+                hidden;
+
+            color:
+                rgba(
+                    17,
+                    17,
+                    17,
+                    0.75
+                );
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(
+                    13px,
+                    1.1vw,
+                    17px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                1.6;
+
+            text-align:
+                center;
+
+        }
+
+
+        .poster-description.active {
+
+            grid-template-rows:
+                1fr;
+
+            margin-top:
+                14px;
+
+            opacity:
+                1;
+
+        }
+
+
+        /* =====================================================
+           POSTER MODAL
+        ====================================================== */
+
+        .poster-modal {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                2000;
+
+            display:
+                none;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            padding:
+                40px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.82
+                );
+
+            backdrop-filter:
+                blur(5px);
+
+            -webkit-backdrop-filter:
+                blur(5px);
+
+        }
+
+
+        .poster-modal.active {
+
+            display:
+                flex;
+
+        }
+
+
+        /* =====================================================
+           MODAL IMAGE
+        ====================================================== */
+
+        .modal-image {
+
+            max-width:
+                90vw;
+
+            max-height:
+                90vh;
+
+            width:
+                auto;
+
+            height:
+                auto;
+
+            object-fit:
+                contain;
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                );
+
+            animation:
+                zoomIn 0.3s ease;
+
+        }
+
+
+        /* =====================================================
+           MODAL ANIMATION
+        ====================================================== */
+
+        @keyframes zoomIn {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(0.85);
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MODAL CLOSE
+        ====================================================== */
+
+        .close-button {
+
+            position:
+                absolute;
+
+            top:
+                25px;
+
+            right:
+                35px;
+
+            width:
+                50px;
+
+            height:
+                50px;
+
+            border:
+                none;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            color:
+                var(--white);
+
+            font-size:
+                38px;
+
+            line-height:
+                40px;
+
+            cursor:
+                pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+
+        }
+
+
+        .close-button:hover {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.3
+                );
+
+            transform:
+                rotate(90deg);
+
+        }
+
+
+        /* =====================================================
+           BOTTOM BACK BUTTON
+        ====================================================== */
+
+        .bottom-back {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            margin-top:
+                85px;
+
+        }
+
+
+        .bottom-back a {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-width:
+                280px;
+
+            min-height:
+                72px;
+
+            padding:
+                13px 45px;
+
+            color:
+                var(--blue-deep);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.18
+                );
+
+            border:
+                3px solid
+                var(--blue-deep);
+
+            border-radius:
+                42px;
+
+            text-decoration:
+                none;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                7px;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+        }
+
+
+        .bottom-back a:hover {
+
+            background:
+                var(--blue-deep);
+
+            color:
+                var(--white);
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    7,
+                    84,
+                    135,
+                    0.18
+                );
+
+        }
+
+
+        /* =====================================================
+           OVERLAY
+        ====================================================== */
+
+        .overlay {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background:
+                rgba(
+                    0,
+                    38,
+                    66,
+                    0.35
+                );
+
+            opacity:
+                0;
+
+            visibility:
+                hidden;
+
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+
+            z-index:
+                900;
+
+        }
+
+
+        .overlay.active {
+
+            opacity:
+                1;
+
+            visibility:
+                visible;
+
+        }
+
+
+        /* =====================================================
+           SIDE MENU
+        ====================================================== */
+
+        .side-menu {
+
+            position:
+                fixed;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            width:
+                365px;
+
+            max-width:
+                40vw;
+
+            height:
+                100vh;
+
+            background:
+                var(--blue-deep);
+
+            z-index:
+                1000;
+
+            transform:
+                translateX(-100%);
+
+            transition:
+                transform 0.4s ease;
+
+            display:
+                flex;
+
+            justify-content:
+                flex-start;
+
+            align-items:
+                stretch;
+
+            box-shadow:
+                8px 0 28px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.10
+                );
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .side-menu.active {
+
+            transform:
+                translateX(0);
+
+        }
+
+
+        /* =====================================================
+           SIDE MENU TOP PROTECTION
+        ====================================================== */
+
+        .side-menu::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                125px;
+
+            background:
+                var(--blue-deep);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.08
+                );
+
+            z-index:
+                2;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .side-menu::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                100px;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                45px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--blue-deep),
+                    rgba(
+                        7,
+                        84,
+                        135,
+                        0
+                    )
+                );
+
+            z-index:
+                2;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        /* =====================================================
+           SIDE MENU CONTENT
+        ====================================================== */
+
+        .side-menu-content {
+
+            position:
+                relative;
+
+            z-index:
+                1;
+
+            width:
+                78%;
+
+            height:
+                100%;
+
+            max-height:
+                100vh;
+
+            overflow-y:
+                auto;
+
+            padding-top:
+                135px;
+
+            padding-bottom:
+                50px;
+
+            margin-left:
+                43px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                18px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                )
+                transparent;
+
+        }
+
+
+        /* =====================================================
+           SIDE MENU SCROLLBAR
+        ====================================================== */
+
+        .side-menu-content::-webkit-scrollbar {
+
+            width:
+                5px;
+
+        }
+
+
+        .side-menu-content::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+
+        }
+
+
+        .side-menu-content::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+
+            border-radius:
+                10px;
+
+        }
+
+
+        .side-menu-content::-webkit-scrollbar-thumb:hover {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+        }
+        
+
+
+        /* =====================================================
+           MENU SECTION TITLE
+        ====================================================== */
+
+        .menu-section-title {
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.55
+                );
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                3px;
+
+            margin-top:
+                20px;
+
+            margin-bottom:
+                -5px;
+
+        }
+
+
+        /* =====================================================
+           MENU LINKS
+        ====================================================== */
+
+        .side-menu-content a {
+
+            color:
+                var(--white);
+
+            text-decoration:
+                none;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                20px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                1px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+            transition:
+                padding-left 0.3s ease,
+                opacity 0.3s ease;
+
+        }
+
+
+        .side-menu-content a:hover {
+
+            padding-left:
+                10px;
+
+            opacity:
+                0.75;
+
+        }
+
+        .side-menu-content a.current-page {
+            color: #c8e5ff;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 1000px) {
+
+            .tema-page {
+
+                padding-left:
+                    5%;
+
+                padding-right:
+                    5%;
+
+            }
+
+
+            .poster-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                column-gap:
+                    8%;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                background-attachment:
+                    scroll;
+
+            }
+
+
+            .tema-page {
+
+                padding:
+                    100px 25px 70px;
+
+            }
+
+
+            /* =============================================
+               HAMBURGER
+            ============================================== */
+
+            .menu-button {
+
+                top:
+                    28px;
+
+                left:
+                    22px;
+
+                width:
+                    52px;
+
+                height:
+                    40px;
+
+            }
+
+
+            .menu-button span {
+
+                width:
+                    52px;
+
+                height:
+                    4px;
+
+            }
+
+
+            .menu-button::before {
+
+                height:
+                    82px;
+
+            }
+
+
+            .menu-button::after {
+
+                top:
+                    82px;
+
+                height:
+                    30px;
+
+            }
+
+
+            .menu-button.active
+            span:nth-child(1) {
+
+                transform:
+                    translateY(13px)
+                    rotate(45deg);
+
+            }
+
+
+            .menu-button.active
+            span:nth-child(3) {
+
+                transform:
+                    translateY(-13px)
+                    rotate(-45deg);
+
+            }
+
+
+            /* =============================================
+               HEADER
+            ============================================== */
+
+            .header {
+
+                margin-bottom:
+                    45px;
+
+            }
+
+
+            .header h1 {
+
+                font-size:
+                    60px;
+
+                letter-spacing:
+                    -3px;
+
+            }
+
+
+            .header .theme-description {
+
+                font-size:
+                    16px;
+
+                max-width:
+                    90%;
+
+                margin-top:
+                    18px;
+
+            }
+
+
+            /* =============================================
+               POSTER GRID
+            ============================================== */
+
+            .poster-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                row-gap:
+                    55px;
+
+            }
+
+
+            /* =============================================
+               POSTER
+            ============================================== */
+
+            .poster-button {
+
+                max-width:
+                    300px;
+
+            }
+
+
+            .poster-title {
+
+                font-size:
+                    17px;
+
+                letter-spacing:
+                    5px;
+
+            }
+
+
+            .poster-title:hover {
+
+                letter-spacing:
+                    7px;
+
+            }
+
+
+            .poster-description {
+
+                max-width:
+                    300px;
+
+            }
+
+
+            .poster-description p {
+
+                font-size:
+                    14px;
+
+            }
+
+
+            /* =============================================
+               MODAL
+            ============================================== */
+
+            .poster-modal {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .modal-image {
+
+                max-width:
+                    94vw;
+
+                max-height:
+                    88vh;
+
+            }
+
+
+            .close-button {
+
+                top:
+                    15px;
+
+                right:
+                    18px;
+
+                width:
+                    44px;
+
+                height:
+                    44px;
+
+                font-size:
+                    32px;
+
+            }
+
+
+            /* =============================================
+               BOTTOM BACK
+            ============================================== */
+
+            .bottom-back {
+
+                margin-top:
+                    65px;
+
+            }
+
+
+            .bottom-back a {
+
+                min-width:
+                    220px;
+
+                min-height:
+                    60px;
+
+                padding:
+                    10px 25px;
+
+                font-size:
+                    16px;
+
+                letter-spacing:
+                    5px;
+
+            }
+
+
+            /* =============================================
+               SIDE MENU
+            ============================================== */
+
+            .side-menu {
+
+                width:
+                    310px;
+
+                max-width:
+                    82vw;
+
+            }
+
+
+            .side-menu::before {
+
+                height:
+                    110px;
+
+            }
+
+
+            .side-menu::after {
+
+                top:
+                    88px;
+
+                height:
+                    40px;
+
+            }
+
+
+            .side-menu-content {
+
+                width:
+                    78%;
+
+                padding-top:
+                    120px;
+
+                padding-bottom:
+                    40px;
+
+                margin-left:
+                    38px;
+
+            }
+
+
+            .side-menu-content a {
+
+                font-size:
+                    17px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 400px) {
+
+            .tema-page {
+
+                padding:
+                    90px 20px 60px;
+
+            }
+
+
+            .header h1 {
+
+                font-size:
+                    52px;
+
+            }
+
+
+            .header .theme-description {
+
+                font-size:
+                    14px;
+
+            }
+
+
+            .poster-button {
+
+                max-width:
+                    280px;
+
+            }
+
+
+            .poster-title {
+
+                font-size:
+                    16px;
+
+                letter-spacing:
+                    4px;
+
+            }
+
+
+            .side-menu {
+
+                width:
+                    85vw;
+
+            }
+
+
+            .side-menu::before {
+
+                height:
+                    100px;
+
+            }
+
+
+            .side-menu::after {
+
+                top:
+                    80px;
+
+                height:
+                    35px;
+
+            }
+
+
+            .side-menu-content {
+
+                width:
+                    82%;
+
+                padding-top:
+                    110px;
+
+                padding-bottom:
+                    35px;
+
+                margin-left:
+                    30px;
+
+            }
+
+
+            .side-menu-content a {
+
+                font-size:
+                    16px;
+
+            }
+
+
+            .menu-section-title {
+
+                font-size:
+                    11px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HAMBURGER BUTTON
+    ====================================================== -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        type="button"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="tema-page">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+
+            <a
+                href="index.html"
+                class="back-button"
+            >
+                Psychological Scale Exhibition
+            </a>
+
+
+            <h1>
+                BODY PERCEPTION AND LIFESTYLE BEHAVIOUR
+            </h1>
+
+
+            <p class="theme-description">
+
+                "Understand how we perceive our bodies and shape our everyday habits."
+
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             POSTER GRID
+        ================================================== -->
+
+        <section class="poster-grid">
+
+
+            <!-- =================================================
+                 POSTER 1
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/1.jpg')"
+                >
+
+                    <img
+                        src="poster/1.jpg"
+                        alt="Poster 1"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 POSTER 2
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/2.jpg')"
+                >
+
+                    <img
+                        src="poster/2.jpg"
+                        alt="Poster 2"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 POSTER 3
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/3.jpg')"
+                >
+
+                    <img
+                        src="poster/3.jpg"
+                        alt="Poster 3"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 4
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/4.jpg')"
+                >
+
+                    <img
+                        src="poster/4.jpg"
+                        alt="Poster 4"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 5
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/5.jpg')"
+                >
+
+                    <img
+                        src="poster/5.jpg"
+                        alt="Poster 5"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 6
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/6.jpg')"
+                >
+
+                    <img
+                        src="poster/6.jpg"
+                        alt="Poster 6"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 7
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/7.jpg')"
+                >
+
+                    <img
+                        src="poster/7.jpg"
+                        alt="Poster 7"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 POSTER 8
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/8.jpg')"
+                >
+
+                    <img
+                        src="poster/8.jpg"
+                        alt="Poster 8"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 POSTER 9
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/9.jpg')"
+                >
+
+                    <img
+                        src="poster/9.jpg"
+                        alt="Poster 9"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 10
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/10.jpg')"
+                >
+
+                    <img
+                        src="poster/10.jpg"
+                        alt="Poster 10"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 11
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/11.jpg')"
+                >
+
+                    <img
+                        src="poster/11.jpg"
+                        alt="Poster 11"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- =================================================
+                 POSTER 12
+            ================================================== -->
+
+            <div class="poster-item">
+
+                <button
+                    class="poster-button"
+                    type="button"
+                    onclick="openPoster('poster/12.jpg')"
+                >
+
+                    <img
+                        src="poster/12.jpg"
+                        alt="Poster 12"
+                    >
+
+                </button>
+
+
+                <button
+                    class="poster-title"
+                    type="button"
+                    onclick="toggleDescription(this)"
+                >
+
+                    LOREM IPSUM
+
+                </button>
+
+
+                <div class="poster-description">
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             BACK BUTTON
+        ================================================== -->
+
+        <div class="bottom-back">
+
+            <a href="menu.html">
+
+                KEMBALI
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         POSTER MODAL
+    ====================================================== -->
+
+    <div
+        class="poster-modal"
+        id="posterModal"
+        onclick="closePoster(event)"
+    >
+
+
+        <button
+            class="close-button"
+            type="button"
+            onclick="closePoster()"
+            aria-label="Tutup poster"
+        >
+
+            ×
+
+        </button>
+
+
+        <img
+            class="modal-image"
+            id="modalImage"
+            src=""
+            alt="Poster"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         OVERLAY
+    ====================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDE MENU
+    ====================================================== -->
+
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+    >
+
+        <nav class="side-menu-content">
+
+
+            <div class="menu-section-title">
+                EXPLORE
+            </div>
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="tentang.html">
+                Tentang Exhibition
+            </a>
+
+
+            <a href="profil-dosen.html">
+                Profil Dosen
+            </a>
+
+
+            <a href="profil-asisten.html">
+                Profil Asisten
+            </a>
+
+            <a href="menu.html">
+                Our Theme
+            </a>
+
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+
+            <a href="menu.html">
+                Our Theme
+            </a>
+
+            <!-- TEMA -->
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+            <a href="relationship.html">
+                Relationship
+            </a>
+
+            <a href="selfesteem.html">
+                Self-Esteem and Self-Concept
+            </a>
+
+            <a href="body-perception-and-lifstyle-behaviours.html" class="current-page" aria-current="page">
+                Body Perception and Lifestyle Behaviors
+            </a>
+
+            <a href="digital-behaviour.html">
+                Digital Behavior
+            </a>
+
+            <a href="academic-cognitive-and-career-processes.html">
+                Academic, Cognitive and Career Processes
+            </a>
+
+            <a href="psychological-wellbeing.html">
+                Psychologicall Well-Being
+            </a>
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+
+            <a href="voting.html">
+                Vote
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           ELEMENTS
+        ====================================================== */
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+        const sideMenu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const overlay =
+            document.getElementById(
+                "overlay"
+            );
+
+        const posterModal =
+            document.getElementById(
+                "posterModal"
+            );
+
+        const modalImage =
+            document.getElementById(
+                "modalImage"
+            );
+
+
+        /* =====================================================
+           OPEN POSTER
+        ====================================================== */
+
+        function openPoster(imageSource) {
+
+
+            /*
+             * Masukkan gambar poster
+             * ke dalam modal.
+             */
+
+            modalImage.src =
+                imageSource;
+
+
+            /*
+             * Tampilkan modal.
+             */
+
+            posterModal.classList.add(
+                "active"
+            );
+
+
+            /*
+             * Aktifkan state modal.
+             
+             * State ini otomatis:
+             * - menyembunyikan hamburger
+             * - menonaktifkan hamburger
+             * - menghilangkan protection
+             */
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+            /*
+             * Pastikan protection hilang.
+             */
+
+            menuButton.classList.remove(
+                "is-obscured"
+            );
+
+
+            /*
+             * Kunci scroll halaman utama.
+             */
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        /* =====================================================
+           CLOSE POSTER
+        ====================================================== */
+
+        function closePoster(event) {
+
+
+            /*
+             * Jika user mengklik gambar poster,
+             * jangan tutup modal.
+             */
+
+            if (
+                event &&
+                event.target ===
+                modalImage
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * Tutup modal.
+             */
+
+            posterModal.classList.remove(
+                "active"
+            );
+
+
+            /*
+             * Hapus state modal.
+             
+             * Hamburger akan kembali.
+             */
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+
+            /*
+             * Kembalikan scroll.
+             */
+
+            document.body.style.overflow =
+                "";
+
+
+            /*
+             * Setelah modal benar-benar ditutup,
+             * cek kembali apakah hamburger
+             * sedang bertabrakan dengan content.
+             */
+
+            setTimeout(
+                checkHamburgerCollision,
+                50
+            );
+
+        }
+
+
+        /* =====================================================
+           TOGGLE POSTER DESCRIPTION
+        ====================================================== */
+
+        function toggleDescription(title) {
+
+
+            const description =
+                title.nextElementSibling;
+
+
+            const isActive =
+                description.classList.contains(
+                    "active"
+                );
+
+
+            /*
+             * Tutup semua description lain.
+             */
+
+            document
+                .querySelectorAll(
+                    ".poster-description.active"
+                )
+                .forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+            /*
+             * Hapus active dari semua title.
+             */
+
+            document
+                .querySelectorAll(
+                    ".poster-title.active"
+                )
+                .forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+            /*
+             * Jika sebelumnya belum aktif,
+             * buka description yang diklik.
+             */
+
+            if (!isActive) {
+
+                description.classList.add(
+                    "active"
+                );
+
+                title.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           OPEN MENU
+        ====================================================== */
+
+        function openMenu() {
+
+
+            /*
+             * Pastikan modal poster tidak aktif.
+             */
+
+            if (
+                document.body.classList.contains(
+                    "modal-open"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * Aktifkan hamburger → X.
+             */
+
+            menuButton.classList.add(
+                "active"
+            );
+
+
+            /*
+             * Hilangkan protection.
+             */
+
+            menuButton.classList.remove(
+                "is-obscured"
+            );
+
+
+            /*
+             * Buka side menu.
+             */
+
+            sideMenu.classList.add(
+                "active"
+            );
+
+
+            /*
+             * Tampilkan overlay.
+             */
+
+            overlay.classList.add(
+                "active"
+            );
+
+
+            /*
+             * Accessibility.
+             */
+
+            sideMenu.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Tutup menu"
+            );
+
+
+            /*
+             * Lock halaman utama.
+             */
+
+            document.body.classList.add(
+                "menu-open"
+            );
+
+        }
+
+
+        /* =====================================================
+           CLOSE MENU
+        ====================================================== */
+
+        function closeMenu() {
+
+
+            /*
+             * Kembalikan hamburger.
+             */
+
+            menuButton.classList.remove(
+                "active"
+            );
+
+
+            /*
+             * Tutup side menu.
+             */
+
+            sideMenu.classList.remove(
+                "active"
+            );
+
+
+            /*
+             * Tutup overlay.
+             */
+
+            overlay.classList.remove(
+                "active"
+            );
+
+
+            /*
+             * Accessibility.
+             */
+
+            sideMenu.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Buka menu"
+            );
+
+
+            /*
+             * Unlock halaman.
+             */
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+
+            /*
+             * Cek kembali protection.
+             */
+
+            setTimeout(
+                checkHamburgerCollision,
+                50
+            );
+
+        }
+
+
+        /* =====================================================
+           TOGGLE MENU
+        ====================================================== */
+
+        menuButton.addEventListener(
+            "click",
+            function() {
+
+
+                /*
+                 * Jangan izinkan hamburger
+                 * bekerja ketika modal terbuka.
+                 */
+
+                if (
+                    document.body.classList.contains(
+                        "modal-open"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    sideMenu.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeMenu();
+
+                } else {
+
+                    openMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           OVERLAY CLICK
+        ====================================================== */
+
+        overlay.addEventListener(
+            "click",
+            function() {
+
+                closeMenu();
+
+            }
+        );
+
+
+        /* =====================================================
+           SIDE MENU LINKS
+        ====================================================== */
+
+        const menuLinks =
+            document.querySelectorAll(
+                ".side-menu a"
+            );
+
+
+        menuLinks.forEach(
+            function(link) {
+
+                link.addEventListener(
+                    "click",
+                    function() {
+
+                        closeMenu();
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           COLLISION DETECTION
+           
+           Protection hanya muncul ketika content
+           masuk ke area hamburger saat scrolling.
+        ====================================================== */
+
+        function checkHamburgerCollision() {
+
+
+            /*
+             * Jika modal poster terbuka,
+             * protection selalu mati.
+             */
+
+            if (
+                document.body.classList.contains(
+                    "modal-open"
+                )
+            ) {
+
+                menuButton.classList.remove(
+                    "is-obscured"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Jika side menu terbuka,
+             * protection tidak diperlukan.
+             */
+
+            if (
+                sideMenu.classList.contains(
+                    "active"
+                )
+            ) {
+
+                menuButton.classList.remove(
+                    "is-obscured"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Jika berada di bagian paling atas,
+             * protection tidak diperlukan.
+             */
+
+            if (
+                window.scrollY <= 5
+            ) {
+
+                menuButton.classList.remove(
+                    "is-obscured"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Area perlindungan.
+             */
+
+            const protectedTop =
+                0;
+
+
+            const protectedBottom =
+                window.innerWidth <= 700
+                    ? 82
+                    : 105;
+
+
+            /*
+             * Ambil elemen content.
+             */
+
+            const contentElements =
+                document.querySelectorAll(
+                    ".header, .poster-grid"
+                );
+
+
+            let collision =
+                false;
+
+
+            /*
+             * Cek apakah content
+             * masuk ke area hamburger.
+             */
+
+            contentElements.forEach(
+                function(element) {
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+
+                    if (
+                        rect.top <
+                        protectedBottom
+                        &&
+                        rect.bottom >
+                        protectedTop
+                    ) {
+
+                        collision =
+                            true;
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Aktifkan / matikan protection.
+             */
+
+            if (collision) {
+
+                menuButton.classList.add(
+                    "is-obscured"
+                );
+
+            } else {
+
+                menuButton.classList.remove(
+                    "is-obscured"
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ESCAPE KEY
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+
+                if (
+                    event.key !==
+                    "Escape"
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Prioritas 1:
+                 * tutup poster jika modal terbuka.
+                 */
+
+                if (
+                    posterModal.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closePoster();
+
+                    return;
+
+                }
+
+
+                /*
+                 * Prioritas 2:
+                 * tutup hamburger menu.
+                 */
+
+                if (
+                    sideMenu.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL EVENT
+        ====================================================== */
+
+        window.addEventListener(
+            "scroll",
+            checkHamburgerCollision,
+            {
+                passive: true
+            }
+        );
+
+
+        /* =====================================================
+           RESIZE EVENT
+        ====================================================== */
+
+        window.addEventListener(
+            "resize",
+            checkHamburgerCollision
+        );
+
+
+        /* =====================================================
+           INITIAL CHECK
+        ====================================================== */
+
+        checkHamburgerCollision();
+
+
+    </script>
+
+
+</body>
+
+</html>

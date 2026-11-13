@@ -1,0 +1,1747 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Dosen | Psychological Scale Exhibition</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            color: #111111;
+            background: url("assets/background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+        /* =====================================================
+           COLOR VARIABLES
+        ===================================================== */
+
+        :root {
+            --blue: #1464c4;
+            --blue-dark: #07578d;
+            --blue-deep: #075487;
+            --light-blue: #b9d3ef;
+            --very-light-blue: #eef6fc;
+            --white: #ffffff;
+            --black: #111111;
+        }
+
+        /* =====================================================
+           HAMBURGER BUTTON
+           MATCHING INDEX.HTML REFERENCE
+        ===================================================== */
+
+        .menu-button {
+            position: fixed;
+            top: 38px;
+            left: 30px;
+            width: 64px;
+            height: 48px;
+            padding: 4px 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            -webkit-tap-highlight-color: transparent;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Protected area di bagian atas halaman */
+
+        .menu-button::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 105px;
+            background: #eef6fc;
+            opacity: 0;
+            visibility: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;
+            pointer-events: none;
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        /* Gradient di bawah protected area */
+
+        .menu-button::after {
+            content: "";
+            position: fixed;
+            top: 105px;
+            left: 0;
+            width: 100vw;
+            height: 35px;
+            background: linear-gradient(
+                to bottom,
+                #eef6fc,
+                rgba(238, 246, 252, 0)
+            );
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            pointer-events: none;
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        /* Aktif saat konten bertabrakan dengan area atas */
+
+        .menu-button.is-obscured::before {
+            opacity: 0.97;
+            visibility: visible;
+        }
+
+        .menu-button.is-obscured::after {
+            opacity: 0.95;
+            visibility: visible;
+        }
+
+        /* Protected area hilang ketika menu dibuka */
+
+        .menu-button.active::before,
+        .menu-button.active::after {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Tiga garis hamburger */
+
+        .menu-button span {
+            display: block;
+            width: 64px;
+            height: 5px;
+            flex-shrink: 0;
+            background: var(--blue-deep);
+            border-radius: 0;
+            transition:
+                transform 0.35s ease,
+                opacity 0.25s ease,
+                background 0.25s ease;
+        }
+
+        /* Hamburger berubah menjadi X */
+
+        .menu-button.active span:nth-child(1) {
+            transform: translateY(17px) rotate(45deg);
+            background: var(--white);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            transform: translateY(-17px) rotate(-45deg);
+            background: var(--white);
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 6px;
+        }
+
+        /* =====================================================
+           OVERLAY
+        ===================================================== */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 38, 66, 0.35);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+            z-index: 900;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* =====================================================
+           SIDE MENU
+        ===================================================== */
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 365px;
+            max-width: 40vw;
+            height: 100vh;
+            height: 100dvh;
+            background: var(--blue-deep);
+            color: var(--white);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+            box-shadow: 8px 0 28px rgba(0, 0, 0, 0.10);
+            overflow: hidden;
+        }
+
+        .side-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Protected area di dalam panel navigasi */
+
+        .side-menu::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 125px;
+            background: rgba(7, 84, 135, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Gradient panel navigasi */
+
+        .side-menu::after {
+            content: "";
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+            height: 45px;
+            background: linear-gradient(
+                to bottom,
+                rgba(7, 84, 135, 0.95),
+                rgba(7, 84, 135, 0)
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Konten panel navigasi */
+
+        .side-menu-inner {
+            position: relative;
+            z-index: 1;
+            width: 78%;
+            height: 100%;
+            max-height: 100vh;
+            overflow-y: auto;
+            padding: 135px 0 50px;
+            margin-left: 43px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+        }
+
+        .side-menu-inner::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .side-menu-inner::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .side-menu-inner::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+        }
+
+        .side-menu-inner::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Judul bagian navigasi */
+
+        .menu-label,
+        .menu-section-title {
+            color: rgba(255, 255, 255, 0.55);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .menu-label {
+            margin-top: 20px;
+            margin-bottom: -5px;
+        }
+
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 0;
+        }
+
+        .menu-section-title {
+            margin-top: 20px;
+            margin-bottom: -5px;
+        }
+
+        /* Tautan navigasi */
+
+        .menu-link {
+            display: block;
+            flex-shrink: 0;
+            width: 100%;
+            padding: 13px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            transition:
+                padding-left 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        .menu-link:hover {
+            padding-left: 10px;
+            opacity: 0.75;
+            color: var(--white);
+        }
+
+        .menu-link:focus-visible {
+            outline: 2px solid var(--white);
+            outline-offset: 3px;
+        }
+
+        .menu-link.current-page {
+            color: #c8e5ff;
+        }
+
+        /* =====================================================
+           MAIN PAGE
+        ===================================================== */
+
+        .lecturer-page {
+            width: 100%;
+            min-height: 100vh;
+            padding: 35px 4vw 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* =====================================================
+           PAGE TITLE
+        ===================================================== */
+
+        .page-title {
+            margin-top: 0;
+            margin-bottom: 28px;
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(58px, 6.2vw, 104px);
+            line-height: 0.92;
+            font-weight: 800;
+            letter-spacing: -3px;
+            text-align: center;
+            color: var(--blue);
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           TEAM DESCRIPTION
+        ===================================================== */
+
+        .team-description {
+            width: min(100%, 1520px);
+            margin: 0 auto 55px;
+            padding: 42px 75px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .team-description h2 {
+            margin-bottom: 18px;
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(28px, 3vw, 46px);
+            line-height: 1.05;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .team-description p {
+            max-width: 1380px;
+            margin: 0 auto;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(15px, 1.5vw, 24px);
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        /* =====================================================
+           PROFILE AREA
+        ===================================================== */
+
+        .profile-area {
+            position: relative;
+            width: min(100%, 1450px);
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =====================================================
+           PROFILE DISPLAY
+        ===================================================== */
+
+        .profile-display {
+            width: 520px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: visible;
+        }
+
+        /* =====================================================
+           PROFILE SLIDE GROUP
+           FOTO + FRAME + NAMA BERGERAK BERSAMA
+        ===================================================== */
+
+        .profile-slide-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* =====================================================
+           PROFILE IMAGE FRAME
+        ===================================================== */
+
+        .profile-image-wrapper {
+            position: relative;
+            width: clamp(300px, 27vw, 450px);
+            height: clamp(300px, 27vw, 450px);
+            border: 8px solid var(--blue-deep);
+            border-radius: 50%;
+            overflow: hidden;
+            background: #dcecf7;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(7, 84, 135, 0.08);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* =====================================================
+           PROFILE NAME
+        ===================================================== */
+
+        .profile-name {
+            margin-top: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(25px, 2.2vw, 40px);
+            line-height: 1.15;
+            font-weight: 800;
+            color: var(--black);
+            text-align: center;
+        }
+
+        .profile-description {
+            display: none;
+        }
+
+        /* =====================================================
+           SLIDE ANIMATION
+        ===================================================== */
+
+        .profile-slide-group.slide-out-left {
+            animation: profileOutLeft 0.42s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        .profile-slide-group.slide-out-right {
+            animation: profileOutRight 0.42s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        .profile-slide-group.slide-in-right {
+            animation: profileInRight 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .profile-slide-group.slide-in-left {
+            animation: profileInLeft 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        /* =====================================================
+           KEYFRAMES
+        ===================================================== */
+
+        @keyframes profileOutLeft {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-85px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes profileOutRight {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(85px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes profileInRight {
+            0% {
+                transform: translateX(85px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes profileInLeft {
+            0% {
+                transform: translateX(-85px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* =====================================================
+           DOT INDICATOR
+        ===================================================== */
+
+        .profile-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            margin-top: 24px;
+        }
+
+        .profile-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(7, 84, 135, 0.25);
+            transition:
+                width 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .profile-dot.active {
+            width: 28px;
+            border-radius: 20px;
+            background: var(--blue-deep);
+        }
+
+        /* =====================================================
+           PROFILE ARROWS
+        ===================================================== */
+
+        .profile-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 105px;
+            height: 130px;
+            border: none;
+            background: transparent;
+            color: var(--blue-deep);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 0.7;
+            transition:
+                transform 0.25s ease,
+                opacity 0.25s ease;
+            z-index: 20;
+        }
+
+        .profile-arrow:hover {
+            opacity: 0.82;
+        }
+
+        .profile-arrow.left {
+            left: 0;
+        }
+
+        .profile-arrow.right {
+            right: 0;
+        }
+
+        .profile-arrow.left:hover {
+            transform: translateY(-50%) translateX(-6px);
+        }
+
+        .profile-arrow.right:hover {
+            transform: translateY(-50%) translateX(6px);
+        }
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 280px;
+            margin: 25px auto 0;
+            padding: 15px 42px;
+            border: 3px solid var(--blue-deep);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--blue-deep);
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(18px, 1.5vw, 25px);
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--blue-deep);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+            .lecturer-page {
+                padding: 35px 4vw 60px;
+            }
+
+            .page-title {
+                margin-bottom: 25px;
+            }
+
+            .team-description {
+                width: 94%;
+                padding: 35px 50px;
+                margin-bottom: 35px;
+            }
+
+            .profile-area {
+                min-height: 560px;
+            }
+
+            .profile-display {
+                width: 460px;
+            }
+
+            .profile-image-wrapper {
+                width: 350px;
+                height: 350px;
+            }
+
+            .profile-arrow {
+                width: 75px;
+                font-size: 90px;
+            }
+        }
+
+        /* =====================================================
+           MOBILE / TABLET
+        ===================================================== */
+
+        @media (max-width: 700px) {
+            /* Hamburger mobile */
+
+            .menu-button {
+                top: 28px;
+                left: 22px;
+                width: 52px;
+                height: 40px;
+                padding: 4px 0;
+            }
+
+            .menu-button::before {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 82px;
+                background: #eef6fc;
+            }
+
+            .menu-button::after {
+                top: 82px;
+                left: 0;
+                width: 100vw;
+                height: 30px;
+                background: linear-gradient(
+                    to bottom,
+                    #eef6fc,
+                    rgba(238, 246, 252, 0)
+                );
+            }
+
+            .menu-button span {
+                width: 52px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
+            }
+
+            .menu-button.active::before,
+            .menu-button.active::after {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            /* Side menu mobile */
+
+            .side-menu {
+                width: 310px;
+                max-width: 82vw;
+            }
+
+            .side-menu::before {
+                height: 110px;
+            }
+
+            .side-menu::after {
+                top: 88px;
+                height: 40px;
+            }
+
+            .side-menu-inner {
+                width: 78%;
+                height: 100%;
+                max-height: 100vh;
+                padding: 120px 0 40px;
+                margin-left: 38px;
+                gap: 18px;
+            }
+
+            .menu-link {
+                font-size: 17px;
+            }
+
+            /* Main page */
+
+            .lecturer-page {
+                padding: 105px 20px 55px;
+            }
+
+            .page-title {
+                margin-top: 0;
+                margin-bottom: 28px;
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .team-description {
+                width: 100%;
+                margin-bottom: 35px;
+                padding: 28px 25px;
+            }
+
+            .team-description h2 {
+                font-size: 27px;
+                margin-bottom: 15px;
+            }
+
+            .team-description p {
+                font-size: 14px;
+                line-height: 1.6;
+                text-align: left;
+            }
+
+            /* Profile area */
+
+            .profile-area {
+                width: 100%;
+                min-height: auto;
+                padding: 0 28px;
+                flex-direction: column;
+            }
+
+            .profile-display {
+                width: 100%;
+                overflow: visible;
+            }
+
+            .profile-slide-group {
+                width: 100%;
+            }
+
+            .profile-image-wrapper {
+                width: min(72vw, 320px);
+                height: min(72vw, 320px);
+                border-width: 7px;
+            }
+
+            /* Mobile slide distance */
+
+            @keyframes profileOutLeft {
+                0% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(-45px);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes profileOutRight {
+                0% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(45px);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes profileInRight {
+                0% {
+                    transform: translateX(45px);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes profileInLeft {
+                0% {
+                    transform: translateX(-45px);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            /* Profile name */
+
+            .profile-name {
+                margin-top: 22px;
+                font-size: 25px;
+                max-width: 90%;
+            }
+
+            /* Arrows */
+
+            .profile-arrow {
+                position: absolute;
+                top: 145px;
+                width: 48px;
+                height: 70px;
+                font-size: 65px;
+            }
+
+            .profile-arrow.left {
+                left: -2px;
+            }
+
+            .profile-arrow.right {
+                right: -2px;
+            }
+
+            .profile-arrow.left:hover,
+            .profile-arrow.right:hover {
+                transform: translateY(-50%);
+            }
+
+            /* Indicator */
+
+            .profile-indicator {
+                margin-top: 17px;
+            }
+
+            /* Back button */
+
+            .back-button {
+                min-width: 210px;
+                margin-top: 38px;
+                padding: 13px 28px;
+                font-size: 17px;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 400px) {
+            .menu-button {
+                top: 23px;
+                left: 18px;
+                width: 44px;
+                height: 34px;
+            }
+
+            .menu-button span {
+                width: 44px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-11px) rotate(-45deg);
+            }
+
+            .side-menu-inner {
+                padding-top: 110px;
+                padding-bottom: 35px;
+                margin-left: 30px;
+            }
+
+            .menu-link {
+                font-size: 16px;
+            }
+
+            .menu-label,
+            .menu-section-title {
+                font-size: 11px;
+            }
+
+            .lecturer-page {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .page-title {
+                font-size: 42px;
+            }
+
+            .team-description {
+                padding: 25px 20px;
+            }
+
+            .team-description h2 {
+                font-size: 25px;
+            }
+
+            .team-description p {
+                font-size: 13px;
+            }
+
+            .profile-image-wrapper {
+                width: 70vw;
+                height: 70vw;
+                max-width: 285px;
+                max-height: 285px;
+            }
+
+            .profile-arrow {
+                top: 130px;
+                font-size: 58px;
+            }
+
+            .profile-arrow.left {
+                left: -7px;
+            }
+
+            .profile-arrow.right {
+                right: -7px;
+            }
+
+            .profile-name {
+                font-size: 23px;
+            }
+
+            .back-button {
+                min-width: 190px;
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+
+        /* =====================================================
+           MOBILE LANDSCAPE
+        ===================================================== */
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            .side-menu-inner {
+                padding-top: 100px;
+                padding-bottom: 20px;
+                gap: 6px;
+            }
+
+            .menu-section {
+                gap: 6px;
+                margin-top: 10px;
+            }
+
+            .menu-link {
+                padding: 8px 0;
+                font-size: 15px;
+            }
+
+            .menu-label,
+            .menu-section-title {
+                margin-top: 10px;
+            }
+        }
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         OVERLAY
+    ===================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+        aria-hidden="true"
+    ></div>
+
+    <!-- =====================================================
+         HAMBURGER BUTTON
+    ===================================================== -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="sideMenu"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- =====================================================
+         SIDE MENU
+    ===================================================== -->
+
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+        inert
+    >
+        <nav class="side-menu-inner" aria-label="Navigasi utama">
+
+            <div class="menu-label">
+                EXPLORE
+            </div>
+
+            <a href="index.html" class="menu-link">
+                Home
+            </a>
+
+            <a href="tentang.html" class="menu-link">
+                Tentang Exhibition
+            </a>
+
+            <a
+                href="profil-dosen.html"
+                class="menu-link current-page"
+                aria-current="page"
+            >
+                Profil Dosen
+            </a>
+
+            <a href="profil-asisten.html" class="menu-link">
+                Profil Asisten
+            </a>
+
+            <a href="menu.html" class="menu-link">
+                Our Theme
+            </a>
+
+            <div class="menu-section">
+                <div class="menu-section-title">
+                    TEMA
+                </div>
+
+                <a href="relationship.html" class="menu-link">
+                Relationship
+                </a>
+
+                <a href="selfesteem.html" class="menu-link">
+                    Self-Esteem and Self-Concept
+                </a>
+
+                <a href="body-perception-and-lifstyle-behaviours.html" class="menu-link">
+                    Body Perception and Lifestyle Behaviors
+                </a>
+
+                <a href="digital-behaviour.html" class="menu-link">
+                    Digital Behavior
+                </a>
+
+                <a href="academic-cognitive-and-career-processes.html" class="menu-link">
+                    Academic, Cognitive and Career Processes
+                </a>
+
+                <a href="psychological-wellbeing.html" class="menu-link">
+                    Psychologicall Well-Being
+                </a>
+
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">
+                    PARTICIPATE
+                </div>
+
+                <a href="voting.html" class="menu-link">
+                    Vote
+                </a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <!-- =====================================================
+         MAIN PAGE
+    ===================================================== -->
+
+    <main class="lecturer-page">
+
+        <!-- PAGE TITLE -->
+
+        <h1 class="page-title">
+            PROFIL DOSEN
+        </h1>
+
+        <!-- TEAM DESCRIPTION -->
+
+        <section class="team-description">
+            <h2>
+                TIM DOSEN
+            </h2>
+
+           <p style="margin-bottom: 20px;">
+                <b>Meet the people behind the learning!</b>
+           </p>
+
+            <p style="margin-bottom: 20px;">
+                Tim Dosen Pengukuran Fakultas Psikologi UBAYA yang turut membimbing, mendampingi, dan berbagi ilmu dalam memahami dunia pengukuran psikologis. Dengan pengalaman dan keahliannya, mereka membantu memastikan bahwa setiap proses pengukuran memiliki landasan ilmiah yang kuat dan dapat dipertanggungjawabkan.
+            </p>
+
+            <p>
+                <i>Because every measure starts with meaningful knowledge!</i>
+           </p>
+
+        </section>
+
+        <!-- =================================================
+             PROFILE CAROUSEL
+        ================================================== -->
+
+        <section
+            class="profile-area"
+            aria-label="Profil dosen"
+        >
+
+            <!-- PREVIOUS BUTTON -->
+
+            <button
+                class="profile-arrow left"
+                id="prevButton"
+                type="button"
+                aria-label="Dosen sebelumnya"
+            >
+                ‹
+            </button>
+
+            <!-- PROFILE DISPLAY -->
+
+            <div class="profile-display">
+
+                <!-- PHOTO, FRAME, NAME, AND DESCRIPTION -->
+
+                <div
+                    class="profile-slide-group"
+                    id="profileSlideGroup"
+                >
+
+                    <div class="profile-image-wrapper">
+                        <img
+                            id="profileImage"
+                            class="profile-image"
+                            src="assets/dosen1.jpeg"
+                            alt="Foto Dosen"
+                        >
+                    </div>
+
+                    <h2
+                        class="profile-name"
+                        id="profileName"
+                    >
+                        Nama Dosen
+                    </h2>
+
+                    <p
+                        class="profile-description"
+                        id="profileDescription"
+                    >
+                        Lorem ipsum dolor sit amet.
+                    </p>
+
+                </div>
+
+                <!-- DOT INDICATOR -->
+
+                <div
+                    class="profile-indicator"
+                    id="profileIndicator"
+                >
+                    <span class="profile-dot active"></span>
+                    <span class="profile-dot"></span>
+                    <span class="profile-dot"></span>
+                </div>
+
+            </div>
+
+            <!-- NEXT BUTTON -->
+
+            <button
+                class="profile-arrow right"
+                id="nextButton"
+                type="button"
+                aria-label="Dosen berikutnya"
+            >
+                ›
+            </button>
+
+        </section>
+
+        <!-- BACK BUTTON -->
+
+        <a href="index.html" class="back-button">
+            KEMBALI
+        </a>
+
+    </main>
+
+    <script>
+        /* =====================================================
+           DATA DOSEN
+           Ganti nama, foto, dan deskripsi sesuai data sebenarnya.
+        ===================================================== */
+
+        const lecturers = [
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen1.jpeg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen2.jpg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            {
+                name: "Nama Dosen",
+                image: "assets/dosen3.jpeg",
+                description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }
+        ];
+
+        let currentLecturer = 0;
+        let isAnimating = false;
+
+        /* =====================================================
+           DOM ELEMENTS
+        ===================================================== */
+
+        const profileSlideGroup =
+            document.getElementById("profileSlideGroup");
+
+        const profileImage =
+            document.getElementById("profileImage");
+
+        const profileName =
+            document.getElementById("profileName");
+
+        const profileDescription =
+            document.getElementById("profileDescription");
+
+        const profileDots =
+            document.querySelectorAll(".profile-dot");
+
+        const prevButton =
+            document.getElementById("prevButton");
+
+        const nextButton =
+            document.getElementById("nextButton");
+
+        /* =====================================================
+           UPDATE DOTS
+        ===================================================== */
+
+        function updateDots() {
+            profileDots.forEach(function (dot, index) {
+                dot.classList.toggle(
+                    "active",
+                    index === currentLecturer
+                );
+            });
+        }
+
+        /* =====================================================
+           UPDATE PROFILE
+           Foto, frame, dan nama bergerak bersama.
+        ===================================================== */
+
+        function updateProfile(direction = 1) {
+            if (isAnimating) {
+                return;
+            }
+
+            isAnimating = true;
+
+            const lecturer = lecturers[currentLecturer];
+
+            const slideOutClass =
+                direction === 1
+                    ? "slide-out-left"
+                    : "slide-out-right";
+
+            const slideInClass =
+                direction === 1
+                    ? "slide-in-right"
+                    : "slide-in-left";
+
+            /* Group lama keluar */
+
+            profileSlideGroup.classList.remove(
+                "slide-in-left",
+                "slide-in-right"
+            );
+
+            profileSlideGroup.classList.add(slideOutClass);
+
+            /* Perbarui data setelah animasi keluar */
+
+            setTimeout(function () {
+                profileImage.src = lecturer.image;
+                profileImage.alt = "Foto " + lecturer.name;
+                profileName.textContent = lecturer.name;
+                profileDescription.textContent = lecturer.description;
+
+                profileSlideGroup.classList.remove(slideOutClass);
+                profileSlideGroup.classList.add(slideInClass);
+
+                /* Paksa browser memperbarui layout */
+
+                void profileSlideGroup.offsetWidth;
+
+                requestAnimationFrame(function () {
+                    profileSlideGroup.classList.remove(slideInClass);
+
+                    updateDots();
+
+                    setTimeout(function () {
+                        isAnimating = false;
+                    }, 550);
+                });
+            }, 420);
+        }
+
+        /* =====================================================
+           NEXT LECTURER
+        ===================================================== */
+
+        function nextLecturer() {
+            if (isAnimating) {
+                return;
+            }
+
+            currentLecturer++;
+
+            if (currentLecturer >= lecturers.length) {
+                currentLecturer = 0;
+            }
+
+            updateProfile(1);
+        }
+
+        /* =====================================================
+           PREVIOUS LECTURER
+        ===================================================== */
+
+        function previousLecturer() {
+            if (isAnimating) {
+                return;
+            }
+
+            currentLecturer--;
+
+            if (currentLecturer < 0) {
+                currentLecturer = lecturers.length - 1;
+            }
+
+            updateProfile(-1);
+        }
+
+        /* =====================================================
+           BUTTON EVENTS
+        ===================================================== */
+
+        nextButton.addEventListener("click", nextLecturer);
+        prevButton.addEventListener("click", previousLecturer);
+
+        /* =====================================================
+           KEYBOARD NAVIGATION
+        ===================================================== */
+
+        document.addEventListener("keydown", function (event) {
+            if (
+                event.target instanceof HTMLElement &&
+                (
+                    event.target.isContentEditable ||
+                    ["INPUT", "TEXTAREA", "SELECT"].includes(event.target.tagName)
+                )
+            ) {
+                return;
+            }
+
+            if (event.key === "ArrowRight") {
+                nextLecturer();
+            }
+
+            if (event.key === "ArrowLeft") {
+                previousLecturer();
+            }
+        });
+
+        /* =====================================================
+           TOUCH / SWIPE
+        ===================================================== */
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const profileArea =
+            document.querySelector(".profile-area");
+
+        profileArea.addEventListener(
+            "touchstart",
+            function (event) {
+                touchStartX = event.changedTouches[0].screenX;
+            },
+            { passive: true }
+        );
+
+        profileArea.addEventListener(
+            "touchend",
+            function (event) {
+                touchEndX = event.changedTouches[0].screenX;
+
+                const difference = touchEndX - touchStartX;
+
+                if (Math.abs(difference) > 50) {
+                    if (difference < 0) {
+                        nextLecturer();
+                    } else {
+                        previousLecturer();
+                    }
+                }
+            },
+            { passive: true }
+        );
+
+        /* =====================================================
+           HAMBURGER MENU
+           Mengikuti mekanisme index.html.
+        ===================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const sideMenu =
+            document.getElementById("sideMenu");
+
+        const overlay =
+            document.getElementById("overlay");
+
+        /* =====================================================
+           DETEKSI TABRAKAN KONTEN
+           Protected area aktif saat diperlukan.
+        ===================================================== */
+
+        function checkHamburgerCollision() {
+            if (sideMenu.classList.contains("active")) {
+                menuButton.classList.remove("is-obscured");
+                return;
+            }
+
+            const pageIsScrolled =
+                window.scrollY > 5 ||
+                document.documentElement.scrollTop > 5;
+
+            if (!pageIsScrolled) {
+                menuButton.classList.remove("is-obscured");
+                return;
+            }
+
+            const protectedBottom =
+                window.innerWidth <= 700 ? 82 : 105;
+
+            const contentElements = document.querySelectorAll(
+                ".page-title, .team-description, .profile-area, .back-button"
+            );
+
+            let collision = false;
+
+            contentElements.forEach(function (element) {
+                const rect = element.getBoundingClientRect();
+
+                if (
+                    rect.top < protectedBottom &&
+                    rect.bottom > 0
+                ) {
+                    collision = true;
+                }
+            });
+
+            menuButton.classList.toggle("is-obscured", collision);
+        }
+
+        /* =====================================================
+           OPEN MENU
+        ===================================================== */
+
+        function openMenu() {
+            menuButton.classList.add("active");
+            menuButton.classList.remove("is-obscured");
+
+            sideMenu.classList.add("active");
+            overlay.classList.add("active");
+
+            sideMenu.setAttribute("aria-hidden", "false");
+            sideMenu.removeAttribute("inert");
+
+            overlay.setAttribute("aria-hidden", "false");
+
+            menuButton.setAttribute("aria-expanded", "true");
+            menuButton.setAttribute("aria-label", "Tutup menu");
+
+            document.body.classList.add("menu-open");
+
+            const firstLink = sideMenu.querySelector("a");
+
+            if (firstLink) {
+                firstLink.focus({ preventScroll: true });
+            }
+        }
+
+        /* =====================================================
+           CLOSE MENU
+        ===================================================== */
+
+        function closeMenu(restoreFocus = false) {
+            menuButton.classList.remove("active");
+            sideMenu.classList.remove("active");
+            overlay.classList.remove("active");
+
+            sideMenu.setAttribute("aria-hidden", "true");
+            sideMenu.setAttribute("inert", "");
+
+            overlay.setAttribute("aria-hidden", "true");
+
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Buka menu");
+
+            document.body.classList.remove("menu-open");
+
+            if (restoreFocus) {
+                menuButton.focus({ preventScroll: true });
+            }
+
+            window.setTimeout(checkHamburgerCollision, 50);
+        }
+
+        /* =====================================================
+           TOGGLE HAMBURGER
+        ===================================================== */
+
+        menuButton.addEventListener("click", function () {
+            if (sideMenu.classList.contains("active")) {
+                closeMenu(true);
+            } else {
+                openMenu();
+            }
+        });
+
+        /* =====================================================
+           CLOSE VIA OVERLAY
+        ===================================================== */
+
+        overlay.addEventListener("click", function () {
+            closeMenu(true);
+        });
+
+        /* =====================================================
+           CLOSE AFTER SELECTING A LINK
+        ===================================================== */
+
+        sideMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                closeMenu(false);
+            });
+        });
+
+        /* =====================================================
+           SCROLL AND RESIZE EVENTS
+        ===================================================== */
+
+        window.addEventListener(
+            "scroll",
+            checkHamburgerCollision,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            checkHamburgerCollision
+        );
+
+        /* =====================================================
+           CLOSE VIA ESCAPE
+        ===================================================== */
+
+        document.addEventListener("keydown", function (event) {
+            if (
+                event.key === "Escape" &&
+                sideMenu.classList.contains("active")
+            ) {
+                closeMenu(true);
+            }
+        });
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        updateDots();
+        checkHamburgerCollision();
+    </script>
+
+</body>
+</html>

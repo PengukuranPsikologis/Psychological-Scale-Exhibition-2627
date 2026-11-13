@@ -1,0 +1,1292 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Asisten | Psychological Scale Exhibition</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================================================
+           RESET DAN VARIABEL
+        ================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #1464c4;
+            --blue-deep: #075487;
+            --white: #ffffff;
+            --ink: #111111;
+            --light-bg: #eef6fc;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            color: var(--ink);
+            background: url("assets/background.png") center / cover fixed no-repeat;
+            overflow-x: hidden;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+        /* ==================================================
+           HAMBURGER BUTTON
+           PATOKAN UTAMA: index.html
+        ================================================== */
+
+        .menu-button {
+            position: fixed;
+            top: 38px;
+            left: 30px;
+            width: 64px;
+            height: 48px;
+            padding: 4px 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 1200;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            -webkit-tap-highlight-color: transparent;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Protected area horizontal di bagian atas */
+
+        .menu-button::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 105px;
+            background: #eef6fc;
+            opacity: 0;
+            visibility: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        /* Gradient di bawah protected area */
+
+        .menu-button::after {
+            content: "";
+            position: fixed;
+            top: 105px;
+            left: 0;
+            width: 100vw;
+            height: 35px;
+
+            background: linear-gradient(
+                to bottom,
+                #eef6fc,
+                rgba(238, 246, 252, 0)
+            );
+
+            opacity: 0;
+            visibility: hidden;
+            z-index: -1;
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        /* Aktif ketika konten bertabrakan dengan tombol */
+
+        .menu-button.is-obscured::before {
+            opacity: 0.97;
+            visibility: visible;
+        }
+
+        .menu-button.is-obscured::after {
+            opacity: 0.95;
+            visibility: visible;
+        }
+
+        /* Protected area menghilang ketika menu dibuka */
+
+        .menu-button.active::before,
+        .menu-button.active::after {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Tiga garis hamburger */
+
+        .menu-button span {
+            display: block;
+            width: 64px;
+            height: 5px;
+            flex-shrink: 0;
+            background: var(--blue-deep);
+            border-radius: 0;
+
+            transition:
+                transform 0.35s ease,
+                opacity 0.25s ease,
+                background 0.25s ease;
+        }
+
+        /* Hamburger berubah menjadi X */
+
+        .menu-button.active span:nth-child(1) {
+            transform: translateY(17px) rotate(45deg);
+            background: var(--white);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            transform: translateY(-17px) rotate(-45deg);
+            background: var(--white);
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 6px;
+        }
+
+        /* ==================================================
+           OVERLAY
+        ================================================== */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 38, 66, 0.35);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition:
+                opacity 0.4s ease,
+                visibility 0.4s ease;
+
+            z-index: 900;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* ==================================================
+           SIDE MENU
+           STRUKTUR DAN UKURAN MENGIKUTI index.html
+        ================================================== */
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 365px;
+            max-width: 40vw;
+            height: 100vh;
+            height: 100dvh;
+
+            background: var(--blue-deep);
+            color: var(--white);
+
+            z-index: 1000;
+
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+
+            box-shadow: 8px 0 28px rgba(0, 0, 0, 0.10);
+
+            overflow: hidden;
+        }
+
+        .side-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Protected area bagian atas panel menu */
+
+        .side-menu::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 125px;
+
+            background: rgba(7, 84, 135, 0.96);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Gradient panel menu */
+
+        .side-menu::after {
+            content: "";
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+            height: 45px;
+
+            background: linear-gradient(
+                to bottom,
+                rgba(7, 84, 135, 0.95),
+                rgba(7, 84, 135, 0)
+            );
+
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Area isi menu dapat di-scroll */
+
+        .side-menu-content {
+            position: relative;
+            z-index: 1;
+
+            width: 78%;
+            height: 100%;
+            max-height: 100vh;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+
+            padding-top: 135px;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 50px;
+
+            margin-left: 43px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+        }
+
+        .side-menu-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .side-menu-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .side-menu-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+        }
+
+        .side-menu-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        /* ==================================================
+           JUDUL BAGIAN NAVIGASI
+        ================================================== */
+
+        .menu-section-title {
+            color: rgba(255, 255, 255, 0.55);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+
+            margin-top: 20px;
+            margin-bottom: -5px;
+        }
+
+        /* ==================================================
+           TAUTAN NAVIGASI
+        ================================================== */
+
+        .side-menu-content a {
+            display: block;
+            flex-shrink: 0;
+
+            color: var(--white);
+            text-decoration: none;
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.4;
+
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+            transition:
+                padding-left 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        .side-menu-content a:hover {
+            padding-left: 10px;
+            opacity: 0.75;
+        }
+
+        .side-menu-content a:focus-visible {
+            outline: 2px solid var(--white);
+            outline-offset: 3px;
+        }
+
+        .side-menu-content a.current-page {
+            color: #c8e5ff;
+        }
+
+        /* ==================================================
+           HALAMAN PROFIL ASISTEN
+        ================================================== */
+
+        .assistant-page {
+            width: 100%;
+            min-height: 100vh;
+
+            padding: 55px 3.8vw 65px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ==================================================
+           JUDUL HALAMAN
+        ================================================== */
+
+        .page-title {
+            width: 100%;
+            margin: 0 0 36px;
+
+            font-family: 'League Spartan', sans-serif;
+            font-size: clamp(58px, 6.2vw, 104px);
+            line-height: 0.95;
+            font-weight: 800;
+            letter-spacing: -3px;
+
+            text-align: center;
+            color: var(--blue);
+            text-transform: uppercase;
+        }
+
+        /* ==================================================
+           DESKRIPSI
+        ================================================== */
+
+        .assistant-description {
+            width: 100%;
+            max-width: 1520px;
+            margin: 0 auto;
+            padding: 42px 75px;
+
+            background: var(--blue);
+            color: var(--white);
+
+            border-radius: 20px;
+
+            font-size: clamp(15px, 1.45vw, 24px);
+            line-height: 1.55;
+            font-weight: 400;
+            text-align: left;
+
+            overflow-wrap: break-word;
+        }
+
+        /* ==================================================
+           GRID PROFIL ASISTEN
+        ================================================== */
+
+        .assistant-grid {
+            width: min(100%, 1450px);
+            margin: 55px auto 0;
+
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            column-gap: 35px;
+            row-gap: 50px;
+
+            align-items: start;
+        }
+
+        .assistant-card {
+            min-width: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            text-align: center;
+        }
+
+        /* ==================================================
+           FOTO ASISTEN
+        ================================================== */
+
+        .assistant-image-wrapper {
+            position: relative;
+
+            width: clamp(170px, 15vw, 250px);
+            aspect-ratio: 1 / 1;
+
+            border: 7px solid var(--blue-deep);
+            border-radius: 50%;
+
+            overflow: hidden;
+            background: #dcecf7;
+            flex-shrink: 0;
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .assistant-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .assistant-card:hover .assistant-image-wrapper {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(7, 84, 135, 0.15);
+        }
+
+        /* ==================================================
+           NAMA ASISTEN
+        ================================================== */
+
+        .assistant-name {
+            width: 100%;
+            margin-top: 22px;
+
+            color: var(--ink);
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(16px, 1.35vw, 23px);
+            line-height: 1.25;
+            font-weight: 800;
+
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+
+        /* ==================================================
+           TOMBOL KEMBALI
+        ================================================== */
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 280px;
+            margin: 65px auto 0;
+            padding: 15px 42px;
+
+            border: 3px solid var(--blue-deep);
+            border-radius: 50px;
+
+            background: transparent;
+            color: var(--blue-deep);
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(18px, 1.5vw, 25px);
+            font-weight: 800;
+            letter-spacing: 6px;
+
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--blue-deep);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* ==================================================
+           TABLET BESAR
+        ================================================== */
+
+        @media (max-width: 1200px) {
+            .assistant-page {
+                padding: 55px 4vw 60px;
+            }
+
+            .assistant-description {
+                padding: 38px 45px;
+            }
+
+            .assistant-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                column-gap: 22px;
+                row-gap: 42px;
+            }
+
+            .assistant-image-wrapper {
+                width: min(100%, 190px);
+            }
+
+            .assistant-name {
+                font-size: 17px;
+            }
+        }
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 900px) {
+            .page-title {
+                font-size: clamp(52px, 8vw, 76px);
+            }
+
+            .assistant-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 30px;
+                row-gap: 48px;
+            }
+
+            .assistant-image-wrapper {
+                width: min(30vw, 230px);
+            }
+
+            .assistant-name {
+                font-size: 19px;
+            }
+        }
+
+        /* ==================================================
+           MOBILE DAN TABLET KECIL
+           HAMBURGER MENGIKUTI index.html
+        ================================================== */
+
+        @media (max-width: 700px) {
+            /* Tombol hamburger mobile */
+
+            .menu-button {
+                top: 28px;
+                left: 22px;
+                width: 52px;
+                height: 40px;
+                padding: 4px 0;
+            }
+
+            .menu-button::before {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 82px;
+                background: #eef6fc;
+            }
+
+            .menu-button::after {
+                top: 82px;
+                left: 0;
+                width: 100vw;
+                height: 30px;
+
+                background: linear-gradient(
+                    to bottom,
+                    #eef6fc,
+                    rgba(238, 246, 252, 0)
+                );
+            }
+
+            .menu-button span {
+                width: 52px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(13px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-13px) rotate(-45deg);
+            }
+
+            /* Panel navigasi mobile */
+
+            .side-menu {
+                width: 310px;
+                max-width: 82vw;
+            }
+
+            .side-menu::before {
+                height: 110px;
+            }
+
+            .side-menu::after {
+                top: 88px;
+                height: 40px;
+            }
+
+            .side-menu-content {
+                width: 78%;
+                height: 100%;
+                max-height: 100vh;
+
+                padding-top: 120px;
+                padding-left: 0;
+                padding-right: 0;
+                padding-bottom: 40px;
+
+                margin-left: 38px;
+                gap: 18px;
+            }
+
+            .side-menu-content a {
+                font-size: 17px;
+            }
+
+            /* Konten profil */
+
+            .assistant-page {
+                padding: 105px 20px 50px;
+            }
+
+            .page-title {
+                margin-bottom: 28px;
+                font-size: clamp(39px, 8.5vw, 48px);
+                letter-spacing: -2px;
+                overflow-wrap: anywhere;
+            }
+
+            .assistant-description {
+                padding: 28px 25px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .assistant-grid {
+                width: 100%;
+                margin-top: 40px;
+
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 18px;
+                row-gap: 38px;
+            }
+
+            .assistant-image-wrapper {
+                width: min(38vw, 175px);
+                border-width: 6px;
+            }
+
+            .assistant-name {
+                margin-top: 15px;
+                font-size: 15px;
+                line-height: 1.3;
+            }
+
+            .back-button {
+                min-width: 210px;
+                margin-top: 50px;
+                padding: 13px 28px;
+                font-size: 17px;
+                letter-spacing: 5px;
+            }
+        }
+
+        /* ==================================================
+           MOBILE KECIL
+        ================================================== */
+
+        @media (max-width: 400px) {
+            .menu-button {
+                top: 23px;
+                left: 18px;
+                width: 44px;
+                height: 34px;
+            }
+
+            .menu-button span {
+                width: 44px;
+                height: 4px;
+            }
+
+            .menu-button.active span:nth-child(1) {
+                transform: translateY(11px) rotate(45deg);
+            }
+
+            .menu-button.active span:nth-child(3) {
+                transform: translateY(-11px) rotate(-45deg);
+            }
+
+            .side-menu-content {
+                padding-top: 110px;
+                padding-bottom: 35px;
+                margin-left: 30px;
+            }
+
+            .side-menu-content a {
+                font-size: 16px;
+            }
+
+            .menu-section-title {
+                font-size: 11px;
+            }
+
+            .assistant-page {
+                padding: 100px 15px 45px;
+            }
+
+            .page-title {
+                font-size: 42px;
+                letter-spacing: -1.5px;
+            }
+
+            .assistant-description {
+                padding: 25px 20px;
+                font-size: 13px;
+            }
+
+            .assistant-grid {
+                column-gap: 12px;
+                row-gap: 32px;
+                margin-top: 32px;
+            }
+
+            .assistant-image-wrapper {
+                width: 38vw;
+                max-width: 150px;
+                border-width: 5px;
+            }
+
+            .assistant-name {
+                margin-top: 12px;
+                font-size: 13px;
+            }
+
+            .back-button {
+                min-width: 190px;
+                margin-top: 42px;
+                padding: 12px 24px;
+                font-size: 16px;
+                letter-spacing: 4px;
+            }
+        }
+
+        /* ==================================================
+           MOBILE LANDSCAPE
+        ================================================== */
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            .side-menu-content {
+                padding-top: 100px;
+                padding-bottom: 20px;
+                gap: 6px;
+            }
+
+            .side-menu-content a {
+                padding: 8px 0;
+                font-size: 15px;
+            }
+
+            .menu-section-title {
+                margin-top: 10px;
+            }
+        }
+
+        /* ==================================================
+           REDUCED MOTION
+        ================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         TOMBOL HAMBURGER
+    ================================================== -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="sideMenu"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- ==================================================
+         OVERLAY
+    ================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+        aria-hidden="true"
+    ></div>
+
+    <!-- ==================================================
+         SIDE MENU
+         URUTAN SAMA DENGAN index.html
+    ================================================== -->
+
+    <aside
+        class="side-menu"
+        id="sideMenu"
+        aria-hidden="true"
+        inert
+    >
+        <nav
+            class="side-menu-content"
+            aria-label="Navigasi utama"
+        >
+
+            <div class="menu-section-title">
+                EXPLORE
+            </div>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="tentang.html">
+                Tentang Exhibition
+            </a>
+
+            <a href="profil-dosen.html">
+                Profil Dosen
+            </a>
+
+            <a
+                href="profil-asisten.html"
+                class="current-page"
+                aria-current="page"
+            >
+                Profil Asisten
+            </a>
+
+            <a href="menu.html">
+                Our Theme
+            </a>
+
+
+            <!-- TEMA -->
+
+            <div class="menu-section-title">
+                TEMA
+            </div>
+
+            <a href="relationship.html">
+                Relationship
+            </a>
+
+            <a href="selfesteem.html">
+                Self-Esteem and Self-Concept
+            </a>
+
+            <a href="body-perception-and-lifstyle-behaviours.html">
+                Body Perception and Lifestyle Behaviors
+            </a>
+
+            <a href="digital-behaviour.html">
+                Digital Behavior
+            </a>
+
+            <a href="academic-cognitive-and-career-processes.html">
+                Academic, Cognitive and Career Processes
+            </a>
+
+            <a href="psychological-wellbeing.html">
+                Psychologicall Well-Being
+            </a>
+
+            <div class="menu-section-title">
+                PARTICIPATE
+            </div>
+
+            <a href="voting.html">
+                Vote
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- ==================================================
+         KONTEN UTAMA PROFIL ASISTEN
+    ================================================== -->
+
+    <main class="assistant-page">
+
+        <h1 class="page-title">
+            PROFIL ASISTEN
+        </h1>
+
+        <section class="assistant-description">
+           
+            <p style="margin-bottom: 20px;">
+                    <b>Meet the people behind the process!</b>
+            </p>
+
+                <p style="margin-bottom: 20px;">
+                    Tim Asisten Dosen Pengukuran yang turut berperan dalam mendukung proses pembelajaran, membantu eksplorasi alat ukur psikologis, serta mendampingi perjalanan memahami dunia pengukuran psikologis.
+                </p>
+
+                <p>
+                    <i>Learning, exploring, and measuring together!</i>
+            </p>
+
+        </section>
+
+        <section
+            class="assistant-grid"
+            aria-label="Profil asisten"
+        >
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten1.jpg"
+                        alt="Foto Asisten 1"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten2.jpg"
+                        alt="Foto Asisten 2"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten3.jpg"
+                        alt="Foto Asisten 3"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten4.jpg"
+                        alt="Foto Asisten 4"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten5.jpg"
+                        alt="Foto Asisten 5"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten6.jpg"
+                        alt="Foto Asisten 6"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten7.jpg"
+                        alt="Foto Asisten 7"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+            <article class="assistant-card">
+                <div class="assistant-image-wrapper">
+                    <img
+                        class="assistant-image"
+                        src="assets/asisten8.jpg"
+                        alt="Foto Asisten 8"
+                        loading="lazy"
+                    >
+                </div>
+                <h2 class="assistant-name">Nama Asdos</h2>
+            </article>
+
+        </section>
+
+        <a href="index.html" class="back-button">
+            KEMBALI
+        </a>
+
+    </main>
+
+    <!-- ==================================================
+         JAVASCRIPT HAMBURGER MENU
+    ================================================== -->
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+
+        /* ==================================================
+           BUKA MENU
+        ================================================== */
+
+        function openMenu() {
+            menuButton.classList.add("active");
+            menuButton.classList.remove("is-obscured");
+
+            sideMenu.classList.add("active");
+            overlay.classList.add("active");
+
+            sideMenu.setAttribute("aria-hidden", "false");
+            sideMenu.removeAttribute("inert");
+
+            overlay.setAttribute("aria-hidden", "false");
+
+            menuButton.setAttribute("aria-expanded", "true");
+            menuButton.setAttribute("aria-label", "Tutup menu");
+
+            document.body.classList.add("menu-open");
+
+            const firstLink = sideMenu.querySelector("a");
+
+            if (firstLink) {
+                firstLink.focus({ preventScroll: true });
+            }
+        }
+
+        /* ==================================================
+           TUTUP MENU
+        ================================================== */
+
+        function closeMenu(restoreFocus = false) {
+            menuButton.classList.remove("active");
+
+            sideMenu.classList.remove("active");
+            overlay.classList.remove("active");
+
+            sideMenu.setAttribute("aria-hidden", "true");
+            sideMenu.setAttribute("inert", "");
+
+            overlay.setAttribute("aria-hidden", "true");
+
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Buka menu");
+
+            document.body.classList.remove("menu-open");
+
+            if (restoreFocus) {
+                menuButton.focus({ preventScroll: true });
+            }
+
+            window.setTimeout(checkHamburgerCollision, 50);
+        }
+
+        /* ==================================================
+           TOGGLE HAMBURGER
+        ================================================== */
+
+        menuButton.addEventListener("click", function () {
+            if (sideMenu.classList.contains("active")) {
+                closeMenu(true);
+            } else {
+                openMenu();
+            }
+        });
+
+        /* ==================================================
+           TUTUP MELALUI OVERLAY
+        ================================================== */
+
+        overlay.addEventListener("click", function () {
+            closeMenu(true);
+        });
+
+        /* ==================================================
+           TUTUP SETELAH MEMILIH TAUTAN
+        ================================================== */
+
+        sideMenu.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                closeMenu(false);
+            });
+        });
+
+        /* ==================================================
+           DETEKSI TABRAKAN KONTEN DENGAN HAMBURGER
+           Mengikuti mekanisme index.html
+        ================================================== */
+
+        function checkHamburgerCollision() {
+            if (sideMenu.classList.contains("active")) {
+                menuButton.classList.remove("is-obscured");
+                return;
+            }
+
+            const pageIsScrolled =
+                window.scrollY > 5 ||
+                document.documentElement.scrollTop > 5;
+
+            if (!pageIsScrolled) {
+                menuButton.classList.remove("is-obscured");
+                return;
+            }
+
+            const protectedBottom =
+                window.innerWidth <= 700 ? 82 : 105;
+
+            const contentElements = document.querySelectorAll(
+                ".page-title, " +
+                ".assistant-description, " +
+                ".assistant-card, " +
+                ".back-button"
+            );
+
+            let collision = false;
+
+            contentElements.forEach(function (element) {
+                const rect = element.getBoundingClientRect();
+
+                if (
+                    rect.top < protectedBottom &&
+                    rect.bottom > 0
+                ) {
+                    collision = true;
+                }
+            });
+
+            menuButton.classList.toggle(
+                "is-obscured",
+                collision
+            );
+        }
+
+        /* ==================================================
+           DETEKSI SCROLL DAN RESIZE
+        ================================================== */
+
+        window.addEventListener(
+            "scroll",
+            checkHamburgerCollision,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            checkHamburgerCollision
+        );
+
+        /* ==================================================
+           TUTUP MENU DENGAN ESCAPE
+        ================================================== */
+
+        document.addEventListener("keydown", function (event) {
+            if (
+                event.key === "Escape" &&
+                sideMenu.classList.contains("active")
+            ) {
+                closeMenu(true);
+            }
+        });
+
+        /* Pemeriksaan awal ketika halaman dimuat */
+
+        checkHamburgerCollision();
+    </script>
+
+</body>
+</html>
