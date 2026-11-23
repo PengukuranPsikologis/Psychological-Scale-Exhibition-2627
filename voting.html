@@ -1026,10 +1026,50 @@ let selectedPosters = [];
 let isSubmitting = false;
 
 /* ==================================================
-   BUAT 12 POSTER
+   DAFTAR POSTER
 ================================================== */
 
-for (let number = 1; number <= 12; number++) {
+const posters = [
+    {"id": 1, "file": "Poster_A_1_Need For Relationship.jpeg", "title": "Need for Relationship Quality and Quantity Scale"},
+    {"id": 2, "file": "Poster_A_4_IDI-6.jpeg", "title": "Interpersonal Dependency Inventory (IDI)"},
+    {"id": 3, "file": "Poster_A_5_RLS.jpeg", "title": "Romantic Loneliness Scale"},
+    {"id": 4, "file": "Poster_C_1_GBS.jpg", "title": "General Belongingness Scale (GBS)"},
+    {"id": 5, "file": "Poster_WA_4_SERR.jpg", "title": "Self-Efficacy in Romantic Relationships Scale (SERR)"},
+    {"id": 6, "file": "Poster_C_6_QTLG.jpg", "title": "Questionnaire on Teamwork Learning Goals (QTLG)"},
+    {"id": 7, "file": "Poster_C_7_SEES.jpg", "title": "self-effacing empathy scale (SEES)"},
+    {"id": 8, "file": "Poster_A_10_SSES-6.png", "title": "Six-Item State Self-Esteem Scale (SSES-6)"},
+    {"id": 9, "file": "Poster_B_10_EMES-16.jpg", "title": "Multidimensional Scale of Self-Esteem-16 (EMES-16)"},
+    {"id": 10, "file": "Poster_WA_1_RSES.jpg", "title": "Relational Self-Esteem Scale (REES)"},
+    {"id": 11, "file": "Poster_WA_2_PSES.png", "title": "Personal Self-Esteem Scale (PEES)"},
+    {"id": 12, "file": "Poster_WA_3_DCS.jpeg", "title": "Defensive Confidence Scale (DCS)"},
+    {"id": 13, "file": "Poster_C_4_SCTS.jpg", "title": "Self-Consciousness Type Scale (SCTS)"},
+    {"id": 14, "file": "Poster_C_11_NGSE.jpg", "title": "New General Self-Efficacy Scale (NGSE)"},
+    {"id": 15, "file": "Poster_A_3_BISCS.png", "title": "Body Image Self-Compassion Scale"},
+    {"id": 16, "file": "Poster_A_6_PAPS.jpeg", "title": "Physical Appearance Perfectionism Scale (PAPS)"},
+    {"id": 17, "file": "Poster_C_10_BAS2.jpg", "title": "Body Appreciation Scale-2 (BAS-2)"},
+    {"id": 18, "file": "Poster_C_8_BSCS-9.jpg", "title": "Brief Self-Control Scale-9 (BSCS-9)"},
+    {"id": 19, "file": "Poster_A_9_BPS.png", "title": "Bedtime procastination Scale (BPS)"},
+    {"id": 20, "file": "Poster_C_3_MENFS.jpg", "title": "Motivation to Eat New Foods Scale (MENF)"},
+    {"id": 21, "file": "Poster_B_4_PFIS.jpg", "title": "Psychological Food Involvement Scale (PFIS)"},
+    {"id": 22, "file": "Poster_A_11_GPS.jpeg", "title": "General Procrastination Scale (GPS)"},
+    {"id": 23, "file": "Poster_A_2_SMAS.jpg", "title": "Social Media Addiction Scale"},
+    {"id": 24, "file": "Poster_A_8_SMRS.jpg", "title": "Social Media Rumination Scale"},
+    {"id": 25, "file": "Poster_C_2_bIAQ.png", "title": "Brief Internet Addiction Questionnaire (bIAQ)"},
+    {"id": 26, "file": "Poster_B_11_ISAN.jpeg", "title": "Indian Scale for Assessment of Nomophobia"},
+    {"id": 27, "file": "Poster_C_9_ISS.jpeg", "title": "Internet Self-Efficacy Scale (ISS)"},
+    {"id": 28, "file": "Poster_B_3_ACI.jpg", "title": "Academic Communication Inventory"},
+    {"id": 29, "file": "Poster_B_9_AISM.jpg", "title": "Academic Impostor Syndrome Measure (AISM)"},
+    {"id": 30, "file": "Poster_B_8_CDMA.png", "title": "Career Decision-Making Ambiguity Scale"},
+    {"id": 31, "file": "Poster_B_1_APS.jpeg", "title": "Attention Problems Scale"},
+    {"id": 32, "file": "Poster_A_7_UCCS.jpeg", "title": "Use of Creative Cognition Scale (UCCS)"},
+    {"id": 33, "file": "Poster_B_2_PPM.jpeg", "title": "Prioritizing Positivity Measure"},
+    {"id": 34, "file": "Poster_B_5_TEHS.png", "title": "Trait Emotion Hope Scale (TEHS)"},
+    {"id": 35, "file": "Poster_B_6_VQ.png", "title": "Valuing Questionnaire"},
+    {"id": 36, "file": "Poster_B_7_BPMS.jpeg", "title": "Belief in the Powers of Mindfulness Scale"},
+    {"id": 37, "file": "Poster_C_5_SBS.jpg", "title": "Social Burnout Scale (SBS)"}
+];
+
+for (const { id: number, file, title: posterTitle } of posters) {
     const item = document.createElement("div");
     item.className = "poster-item";
 
@@ -1040,8 +1080,9 @@ for (let number = 1; number <= 12; number++) {
     button.setAttribute("aria-pressed", "false");
 
     const img = document.createElement("img");
-    img.src = `poster/${number}.jpg`;
-    img.alt = `Poster ${number}`;
+    if (file) img.src = `poster/${file}`;
+    else button.disabled = true;
+    img.alt = file ? posterTitle : "Gambar poster belum tersedia";
     img.loading = number > 4 ? "lazy" : "eager";
 
     const badge = document.createElement("span");
@@ -1052,7 +1093,7 @@ for (let number = 1; number <= 12; number++) {
 
     const title = document.createElement("div");
     title.className = "poster-title";
-    title.textContent = "LOREM IPSUM";
+    title.textContent = posterTitle;
 
     item.append(button, title);
     posterGrid.appendChild(item);
