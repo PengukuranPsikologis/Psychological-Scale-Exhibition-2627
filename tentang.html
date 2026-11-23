@@ -1842,6 +1842,49 @@
 
         }
 
+
+        /* Landscape video */
+        .about-page {
+            align-items: safe center;
+        }
+
+        .video-container {
+            flex: 0 0 48%;
+            width: 48%;
+            max-width: 760px;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-container video {
+            object-fit: contain;
+        }
+
+        .info-panel {
+            height: auto;
+        }
+
+        @media (max-width: 900px) {
+            .about-page {
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 24px;
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .video-container,
+            .info-panel {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 760px;
+            }
+
+            .info-panel {
+                min-height: 0;
+            }
+        }
     </style>
 
 </head>
@@ -1889,7 +1932,7 @@
             >
 
                 <source
-                    src="assets/tentang.mp4"
+                    src="assets/tentang.MOV"
                     type="video/mp4"
                 >
 
