@@ -18,7 +18,7 @@
     ====================================================== -->
 
     <link
-        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700;1,800&display=swap"
         rel="stylesheet"
     >
 
@@ -30,15 +30,13 @@
         ====================================================== */
 
         :root {
-
-            --blue: #1464c4;
+            --blue: #185cbd;
             --blue-dark: #07578d;
             --blue-deep: #075487;
             --blue-soft: #dfeefa;
 
             --ink: #111111;
             --white: #ffffff;
-
         }
 
 
@@ -47,48 +45,27 @@
         ====================================================== */
 
         * {
-
             margin: 0;
             padding: 0;
-
             box-sizing: border-box;
-
         }
-
 
         html,
         body {
-
             width: 100%;
             height: 100%;
-
         }
-
 
         body {
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            background:
-                #eef6fc;
-
-            color:
-                var(--ink);
-
-            overflow:
-                hidden;
-
+            font-family: 'Poppins', sans-serif;
+            background: #eef6fc;
+            color: var(--ink);
+            overflow: hidden;
         }
-
 
         button,
         a {
-
-            font-family:
-                inherit;
-
+            font-family: inherit;
         }
 
 
@@ -97,49 +74,220 @@
         ====================================================== */
 
         .about-page {
-
             width: 100%;
             height: 100vh;
-
-            min-height: 620px;
-
-            position: relative;
+            height: 100dvh;
 
             display: flex;
-
+            flex-direction: column;
             align-items: center;
 
-            justify-content: center;
+            padding: max(105px, 11.5vh) 5.45vw 6vh;
 
-            gap: 3vw;
-
-            padding:
-                6vh 5.5vw;
-
-            overflow-y:
-                auto;
-
-            overflow-x:
-                hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
 
             background:
-
                 linear-gradient(
                     rgba(244, 249, 253, 0.42),
                     rgba(244, 249, 253, 0.42)
                 ),
-
                 url("assets/background.png");
 
-            background-size:
-                cover;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-            background-position:
-                center;
 
-            background-repeat:
-                no-repeat;
+        /* =====================================================
+           INFORMATION PANEL
+        ====================================================== */
 
+        .info-panel {
+            width: 100%;
+
+            flex: 1 0 auto;
+
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 3.25vh 2.9vw 2.7vh;
+
+            background:
+                rgba(116, 159, 219, 0.66);
+
+            border-radius:
+                clamp(24px, 2.5vw, 42px);
+        }
+
+
+        /* =====================================================
+           MAIN TITLE & TAGLINE
+        ====================================================== */
+
+        .info-title,
+        .info-tagline {
+            color: var(--blue);
+
+            font-family:
+                'Poppins',
+                sans-serif;
+
+            font-size:
+                clamp(30px, 3.25vw, 64px);
+
+            font-weight: 800;
+
+            letter-spacing: -0.055em;
+
+            line-height: 1;
+        }
+
+        .info-tagline {
+            font-style: italic;
+
+            margin-bottom:
+                clamp(12px, 1.65vh, 24px);
+        }
+
+
+        /* =====================================================
+           DESCRIPTION CONTAINER
+        ====================================================== */
+
+        .info-copy {
+            display: flex;
+            flex-direction: column;
+
+            gap:
+                clamp(18px, 3.3vh, 38px);
+        }
+
+
+        /* =====================================================
+           DESCRIPTION
+        ====================================================== */
+
+        .info-description {
+            font-family:
+                'Poppins',
+                sans-serif;
+
+            font-size:
+                clamp(16px, 1.42vw, 27px);
+
+            font-weight: 400;
+
+            line-height: 1.38;
+
+            color: var(--ink);
+
+            text-align: justify;
+        }
+
+        .info-description.intro {
+            text-align: left;
+        }
+
+        .info-description strong {
+            font-weight: 700;
+        }
+
+        .info-description em {
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           NAVIGATION BUTTON CONTAINER
+        ====================================================== */
+
+        .page-actions {
+            display: flex;
+
+            align-items: center;
+            justify-content: flex-end;
+
+            flex-wrap: wrap;
+
+            gap:
+                clamp(12px, 1.7vw, 30px);
+
+            margin-top: auto;
+
+            padding-top:
+                clamp(20px, 2.7vh, 32px);
+        }
+
+
+        /* =====================================================
+           KEMBALI & EXPLORE BUTTONS
+        ====================================================== */
+
+        .page-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width:
+                clamp(170px, 14.3vw, 270px);
+
+            min-height:
+                clamp(46px, 5.8vh, 64px);
+
+            padding: 7px 15px;
+
+            color: var(--blue-deep);
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                3px solid var(--blue-deep);
+
+            border-radius: 40px;
+
+            font-family:
+                'Montserrat',
+                sans-serif;
+
+            font-size:
+                clamp(15px, 1.58vw, 28px);
+
+            font-weight: 800;
+
+            letter-spacing: 0.24em;
+
+            text-decoration: none;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .page-button:hover {
+            background: var(--blue-deep);
+
+            color: var(--white);
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(7, 84, 135, 0.18);
+        }
+
+        .page-button:focus-visible,
+        .menu-button:focus-visible,
+        .side-menu a:focus-visible {
+            outline: 3px solid #185cbd;
+            outline-offset: 4px;
         }
 
 
@@ -148,7 +296,6 @@
         ====================================================== */
 
         .menu-button {
-
             position: fixed;
 
             top: 38px;
@@ -161,87 +308,51 @@
 
             border: none;
 
-            background:
-                transparent;
+            background: transparent;
 
-            cursor:
-                pointer;
+            cursor: pointer;
 
-            z-index:
-                1200;
+            z-index: 1200;
 
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            justify-content:
-                space-between;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             transition:
                 opacity 0.3s ease;
-
         }
 
 
         /* =====================================================
            FULL-WIDTH PROTECTED AREA
-
-           DEFAULT:
-           TIDAK TERLIHAT
-
-           Akan muncul hanya ketika content masuk
-           ke area hamburger saat scrolling.
         ====================================================== */
 
         .menu-button::before {
+            content: "";
 
-            content:
-                "";
+            position: fixed;
 
-            position:
-                fixed;
+            top: 0;
+            left: 0;
 
-            top:
-                0;
+            width: 100vw;
+            height: 105px;
 
-            left:
-                0;
+            background: #eef6fc;
 
-            width:
-                100vw;
+            opacity: 0;
+            visibility: hidden;
 
-            height:
-                105px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
 
-            background:
-                #eef6fc;
+            z-index: -1;
 
-            opacity:
-                0;
-
-            visibility:
-                hidden;
-
-            backdrop-filter:
-                blur(10px);
-
-            -webkit-backdrop-filter:
-                blur(10px);
-
-            z-index:
-                -1;
-
-            pointer-events:
-                none;
+            pointer-events: none;
 
             transition:
-
                 opacity 0.25s ease,
-
                 visibility 0.25s ease;
-
         }
 
 
@@ -250,57 +361,33 @@
         ====================================================== */
 
         .menu-button::after {
+            content: "";
 
-            content:
-                "";
+            position: fixed;
 
-            position:
-                fixed;
+            top: 105px;
+            left: 0;
 
-            top:
-                105px;
-
-            left:
-                0;
-
-            width:
-                100vw;
-
-            height:
-                35px;
+            width: 100vw;
+            height: 35px;
 
             background:
                 linear-gradient(
                     to bottom,
-
                     #eef6fc,
-
-                    rgba(
-                        238,
-                        246,
-                        252,
-                        0
-                    )
+                    rgba(238, 246, 252, 0)
                 );
 
-            opacity:
-                0;
+            opacity: 0;
+            visibility: hidden;
 
-            visibility:
-                hidden;
+            z-index: -1;
 
-            z-index:
-                -1;
-
-            pointer-events:
-                none;
+            pointer-events: none;
 
             transition:
-
                 opacity 0.25s ease,
-
                 visibility 0.25s ease;
-
         }
 
 
@@ -309,42 +396,24 @@
         ====================================================== */
 
         .menu-button.is-obscured::before {
-
-            opacity:
-                0.97;
-
-            visibility:
-                visible;
-
+            opacity: 0.97;
+            visibility: visible;
         }
 
-
         .menu-button.is-obscured::after {
-
-            opacity:
-                0.95;
-
-            visibility:
-                visible;
-
+            opacity: 0.95;
+            visibility: visible;
         }
 
 
         /* =====================================================
-           SAAT MENU TERBUKA
-
-           Efek protected area HILANG TOTAL.
+           PROTECTED AREA HILANG SAAT MENU TERBUKA
         ====================================================== */
 
         .menu-button.active::before,
         .menu-button.active::after {
-
-            opacity:
-                0;
-
-            visibility:
-                hidden;
-
+            opacity: 0;
+            visibility: hidden;
         }
 
 
@@ -353,30 +422,19 @@
         ====================================================== */
 
         .menu-button span {
+            width: 64px;
+            height: 5px;
 
-            width:
-                64px;
+            background: var(--blue-deep);
 
-            height:
-                5px;
+            border-radius: 0;
 
-            background:
-                var(--blue-deep);
-
-            border-radius:
-                0;
-
-            display:
-                block;
+            display: block;
 
             transition:
-
                 transform 0.35s ease,
-
                 opacity 0.25s ease,
-
                 background 0.25s ease;
-
         }
 
 
@@ -384,436 +442,24 @@
            HAMBURGER → X
         ====================================================== */
 
-        .menu-button.active
-        span:nth-child(1) {
-
+        .menu-button.active span:nth-child(1) {
             transform:
                 translateY(17px)
                 rotate(45deg);
 
-            background:
-                var(--white);
-
+            background: var(--white);
         }
 
-
-        .menu-button.active
-        span:nth-child(2) {
-
-            opacity:
-                0;
-
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
         }
 
-
-        .menu-button.active
-        span:nth-child(3) {
-
+        .menu-button.active span:nth-child(3) {
             transform:
                 translateY(-17px)
                 rotate(-45deg);
 
-            background:
-                var(--white);
-
-        }
-
-
-        /* =====================================================
-           VIDEO CONTAINER
-        ====================================================== */
-
-        .video-container {
-
-            height:
-                78vh;
-
-            aspect-ratio:
-                9 / 16;
-
-            flex-shrink:
-                0;
-
-            overflow:
-                hidden;
-
-            position:
-                relative;
-
-            background:
-                var(--blue-soft);
-
-            border-radius:
-                28px;
-
-            box-shadow:
-                0 15px 40px
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.12
-                );
-
-        }
-
-
-        /* =====================================================
-           VIDEO
-        ====================================================== */
-
-        .video-container video {
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            display:
-                block;
-
-            object-fit:
-                cover;
-
-        }
-
-
-        /* =====================================================
-           INFORMATION PANEL
-        ====================================================== */
-
-        .info-panel {
-
-            height:
-                78vh;
-
-            flex:
-                1;
-
-            max-width:
-                980px;
-
-            min-width:
-                0;
-
-            position:
-                relative;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            justify-content:
-                flex-start;
-
-            padding:
-                5vh 3.2vw 110px;
-
-            background:
-                rgba(
-                    166,
-                    194,
-                    232,
-                    0.82
-                );
-
-            border-radius:
-                28px;
-
-            overflow:
-                hidden;
-
-            box-shadow:
-                0 15px 40px
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.08
-                );
-
-        }
-
-
-        /* =====================================================
-           PANEL LIGHT EFFECT
-        ====================================================== */
-
-        .info-panel::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            background:
-                linear-gradient(
-                    135deg,
-
-                    rgba(
-                        255,
-                        255,
-                        255,
-                        0.12
-                    ),
-
-                    rgba(
-                        255,
-                        255,
-                        255,
-                        0
-                    )
-                );
-
-            pointer-events:
-                none;
-
-        }
-
-
-        /* =====================================================
-           MAIN TITLE
-        ====================================================== */
-
-        .info-title {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-
-            font-family:
-                'League Spartan',
-                sans-serif;
-
-            color:
-                var(--blue);
-
-            font-size:
-                clamp(
-                    42px,
-                    4.4vw,
-                    72px
-                );
-
-            line-height:
-                0.88;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                -3px;
-
-            margin-bottom:
-                4px;
-
-        }
-
-
-        /* =====================================================
-           TAGLINE
-        ====================================================== */
-
-        .info-tagline {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-
-            color:
-                var(--blue);
-
-            font-family:
-                'Oswald',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    25px,
-                    2.8vw,
-                    48px
-                );
-
-            line-height:
-                0.92;
-
-            font-weight:
-                700;
-
-            font-style:
-                italic;
-
-            letter-spacing:
-                -1px;
-
-            margin-bottom:
-                32px;
-
-        }
-
-
-        /* =====================================================
-           DESCRIPTION
-        ====================================================== */
-
-        .info-description {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-
-            max-width:
-                900px;
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            color:
-                var(--ink);
-
-            font-size:
-                clamp(
-                    17px,
-                    1.45vw,
-                    25px
-                );
-
-            line-height:
-                1.45;
-
-            font-weight:
-                400;
-
-            letter-spacing:
-                0.1px;
-
-            text-align:
-                left;
-
-        }
-
-
-        /* =====================================================
-           BACK BUTTON
-        ====================================================== */
-
-        .back-button {
-
-            position:
-                absolute;
-
-            right:
-                3vw;
-
-            bottom:
-                4.5vh;
-
-            z-index:
-                5;
-
-            min-width:
-                220px;
-
-            min-height:
-                62px;
-
-            padding:
-                10px 30px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            color:
-                var(--blue-deep);
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.12
-                );
-
-            border:
-                3px solid
-                var(--blue-deep);
-
-            border-radius:
-                40px;
-
-            text-decoration:
-                none;
-
-            font-family:
-                'Montserrat',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    16px,
-                    1.25vw,
-                    22px
-                );
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                5px;
-
-            transition:
-
-                background 0.3s ease,
-
-                color 0.3s ease,
-
-                transform 0.3s ease,
-
-                box-shadow 0.3s ease;
-
-        }
-
-
-        .back-button:hover {
-
-            background:
-                var(--blue-deep);
-
-            color:
-                var(--white);
-
-            transform:
-                translateY(-4px);
-
-            box-shadow:
-                0 10px 25px
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.18
-                );
-
+            background: var(--white);
         }
 
 
@@ -822,47 +468,26 @@
         ====================================================== */
 
         .overlay {
+            position: fixed;
 
-            position:
-                fixed;
-
-            inset:
-                0;
+            inset: 0;
 
             background:
-                rgba(
-                    0,
-                    38,
-                    66,
-                    0.35
-                );
+                rgba(0, 38, 66, 0.35);
 
-            opacity:
-                0;
-
-            visibility:
-                hidden;
+            opacity: 0;
+            visibility: hidden;
 
             transition:
-
                 opacity 0.4s ease,
-
                 visibility 0.4s ease;
 
-            z-index:
-                900;
-
+            z-index: 900;
         }
 
-
         .overlay.active {
-
-            opacity:
-                1;
-
-            visibility:
-                visible;
-
+            opacity: 1;
+            visibility: visible;
         }
 
 
@@ -871,66 +496,39 @@
         ====================================================== */
 
         .side-menu {
+            position: fixed;
 
-            position:
-                fixed;
+            top: 0;
+            left: 0;
 
-            top:
-                0;
+            width: 365px;
+            max-width: 40vw;
 
-            left:
-                0;
+            height: 100vh;
 
-            width:
-                365px;
+            background: var(--blue-deep);
 
-            max-width:
-                40vw;
+            z-index: 1000;
 
-            height:
-                100vh;
-
-            background:
-                var(--blue-deep);
-
-            z-index:
-                1000;
-
-            transform:
-                translateX(-100%);
+            transform: translateX(-100%);
 
             transition:
                 transform 0.4s ease;
 
-            display:
-                flex;
+            display: flex;
 
-            justify-content:
-                flex-start;
-
-            align-items:
-                stretch;
+            justify-content: flex-start;
+            align-items: stretch;
 
             box-shadow:
                 8px 0 28px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.10
-                );
+                rgba(0, 0, 0, 0.10);
 
-            overflow:
-                hidden;
-
+            overflow: hidden;
         }
 
-
         .side-menu.active {
-
-            transform:
-                translateX(0);
-
+            transform: translateX(0);
         }
 
 
@@ -939,54 +537,29 @@
         ====================================================== */
 
         .side-menu::before {
+            content: "";
 
-            content:
-                "";
+            position: absolute;
 
-            position:
-                absolute;
+            top: 0;
+            left: 0;
+            right: 0;
 
-            top:
-                0;
-
-            left:
-                0;
-
-            right:
-                0;
-
-            height:
-                125px;
+            height: 125px;
 
             background:
-                rgba(
-                    7,
-                    84,
-                    135,
-                    0.96
-                );
+                rgba(7, 84, 135, 0.96);
 
-            backdrop-filter:
-                blur(12px);
-
-            -webkit-backdrop-filter:
-                blur(12px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
 
             box-shadow:
                 0 8px 18px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.08
-                );
+                rgba(0, 0, 0, 0.08);
 
-            z-index:
-                2;
+            z-index: 2;
 
-            pointer-events:
-                none;
-
+            pointer-events: none;
         }
 
 
@@ -995,50 +568,26 @@
         ====================================================== */
 
         .side-menu::after {
+            content: "";
 
-            content:
-                "";
+            position: absolute;
 
-            position:
-                absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
 
-            top:
-                100px;
-
-            left:
-                0;
-
-            right:
-                0;
-
-            height:
-                45px;
+            height: 45px;
 
             background:
                 linear-gradient(
                     to bottom,
-
-                    rgba(
-                        7,
-                        84,
-                        135,
-                        0.95
-                    ),
-
-                    rgba(
-                        7,
-                        84,
-                        135,
-                        0
-                    )
+                    rgba(7, 84, 135, 0.95),
+                    rgba(7, 84, 135, 0)
                 );
 
-            z-index:
-                2;
+            z-index: 2;
 
-            pointer-events:
-                none;
-
+            pointer-events: none;
         }
 
 
@@ -1047,63 +596,34 @@
         ====================================================== */
 
         .side-menu-content {
+            position: relative;
 
-            position:
-                relative;
+            z-index: 1;
 
-            z-index:
-                1;
+            width: 78%;
 
-            width:
-                78%;
+            height: 100%;
+            max-height: 100vh;
 
-            height:
-                100%;
+            overflow-y: auto;
 
-            max-height:
-                100vh;
+            padding-top: 135px;
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 50px;
 
-            overflow-y:
-                auto;
+            margin-left: 43px;
 
-            padding-top:
-                135px;
+            display: flex;
+            flex-direction: column;
 
-            padding-left:
-                0;
+            gap: 18px;
 
-            padding-right:
-                0;
-
-            padding-bottom:
-                50px;
-
-            margin-left:
-                43px;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                18px;
-
-            scrollbar-width:
-                thin;
+            scrollbar-width: thin;
 
             scrollbar-color:
-
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.35
-                )
-
+                rgba(255, 255, 255, 0.35)
                 transparent;
-
         }
 
 
@@ -1112,48 +632,29 @@
         ====================================================== */
 
         .side-menu-content::-webkit-scrollbar {
-
-            width:
-                5px;
-
+            width: 5px;
         }
-
 
         .side-menu-content::-webkit-scrollbar-track {
-
-            background:
-                transparent;
-
+            background: transparent;
         }
-
 
         .side-menu-content::-webkit-scrollbar-thumb {
-
             background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.35
-                );
+                rgba(255, 255, 255, 0.35);
 
-            border-radius:
-                10px;
-
+            border-radius: 10px;
         }
-
 
         .side-menu-content::-webkit-scrollbar-thumb:hover {
-
             background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
-
+                rgba(255, 255, 255, 0.55);
         }
+
+
+        /* =====================================================
+           CURRENT PAGE
+        ====================================================== */
 
         .side-menu-content a.current-page {
             color: #c8e5ff;
@@ -1165,34 +666,20 @@
         ====================================================== */
 
         .menu-section-title {
-
             color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.55
-                );
+                rgba(255, 255, 255, 0.55);
 
             font-family:
                 'Montserrat',
                 sans-serif;
 
-            font-size:
-                12px;
+            font-size: 12px;
+            font-weight: 700;
 
-            font-weight:
-                700;
+            letter-spacing: 3px;
 
-            letter-spacing:
-                3px;
-
-            margin-top:
-                20px;
-
-            margin-bottom:
-                -5px;
-
+            margin-top: 20px;
+            margin-bottom: -5px;
         }
 
 
@@ -1201,55 +688,33 @@
         ====================================================== */
 
         .side-menu-content a {
+            color: var(--white);
 
-            color:
-                var(--white);
-
-            text-decoration:
-                none;
+            text-decoration: none;
 
             font-family:
                 'Montserrat',
                 sans-serif;
 
-            font-size:
-                20px;
+            font-size: 20px;
+            font-weight: 600;
 
-            font-weight:
-                600;
+            letter-spacing: 1px;
 
-            letter-spacing:
-                1px;
-
-            padding:
-                13px 0;
+            padding: 13px 0;
 
             border-bottom:
                 1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.25
-                );
+                rgba(255, 255, 255, 0.25);
 
             transition:
-
                 padding-left 0.3s ease,
-
                 opacity 0.3s ease;
-
         }
 
-
         .side-menu-content a:hover {
-
-            padding-left:
-                10px;
-
-            opacity:
-                0.75;
-
+            padding-left: 10px;
+            opacity: 0.75;
         }
 
 
@@ -1260,68 +725,26 @@
         @media (max-width: 1100px) {
 
             .about-page {
-
-                gap:
-                    2.5vw;
-
-                padding:
-                    6vh 4vw;
-
+                padding: 105px 4vw 40px;
             }
-
-
-            .video-container {
-
-                height:
-                    76vh;
-
-            }
-
 
             .info-panel {
-
-                height:
-                    76vh;
-
-                padding:
-                    5vh 3vw 100px;
-
+                padding: 32px 3vw 26px;
             }
 
-
-            .info-title {
-
-                font-size:
-                    clamp(
-                        38px,
-                        4.8vw,
-                        60px
-                    );
-
-            }
-
-
+            .info-title,
             .info-tagline {
-
                 font-size:
-                    clamp(
-                        23px,
-                        2.8vw,
-                        40px
-                    );
-
+                    clamp(30px, 4.1vw, 46px);
             }
-
 
             .info-description {
-
                 font-size:
-                    clamp(
-                        16px,
-                        1.7vw,
-                        22px
-                    );
+                    clamp(16px, 1.8vw, 21px);
+            }
 
+            .info-copy {
+                gap: 24px;
             }
 
         }
@@ -1333,43 +756,85 @@
 
         @media (max-width: 700px) {
 
-            body {
+            /* =============================================
+               MAIN PAGE
+            ============================================== */
 
-                overflow:
-                    hidden;
-
+            .about-page {
+                padding: 100px 20px 40px;
             }
 
 
-            .about-page {
+            /* =============================================
+               INFORMATION PANEL
+            ============================================== */
 
-                height:
-                    100vh;
+            .info-panel {
+                flex: 0 0 auto;
 
-                min-height:
-                    100vh;
+                padding: 30px 24px 26px;
 
-                flex-direction:
-                    column;
+                border-radius: 24px;
+            }
 
-                justify-content:
-                    flex-start;
 
-                align-items:
-                    center;
+            /* =============================================
+               TITLE & TAGLINE
+            ============================================== */
 
-                gap:
-                    25px;
+            .info-title,
+            .info-tagline {
+                font-size:
+                    clamp(26px, 6.1vw, 40px);
 
-                padding:
-                    100px 20px 40px;
+                line-height: 1.1;
 
-                overflow-y:
-                    auto;
+                letter-spacing: -0.045em;
+            }
 
-                overflow-x:
-                    hidden;
+            .info-tagline {
+                margin-bottom: 20px;
+            }
 
+
+            /* =============================================
+               DESCRIPTION
+            ============================================== */
+
+            .info-copy {
+                gap: 20px;
+            }
+
+            .info-description {
+                font-size: 16px;
+
+                line-height: 1.6;
+
+                text-align: left;
+            }
+
+
+            /* =============================================
+               NAVIGATION BUTTONS
+            ============================================== */
+
+            .page-actions {
+                gap: 12px;
+
+                padding-top: 25px;
+            }
+
+            .page-button {
+                flex: 1 1 110px;
+
+                width: auto;
+                min-height: 48px;
+
+                font-size: 14px;
+
+                letter-spacing: 0.15em;
+
+                padding: 8px 10px;
             }
 
 
@@ -1378,262 +843,69 @@
             ============================================== */
 
             .menu-button {
+                top: 28px;
+                left: 22px;
 
-                top:
-                    28px;
-
-                left:
-                    22px;
-
-                width:
-                    52px;
-
-                height:
-                    40px;
-
+                width: 52px;
+                height: 40px;
             }
 
-
             .menu-button span {
-
-                width:
-                    52px;
-
-                height:
-                    4px;
-
+                width: 52px;
+                height: 4px;
             }
 
 
             /* =============================================
-               MOBILE FULL-WIDTH PROTECTED AREA
+               MOBILE PROTECTED AREA
             ============================================== */
 
             .menu-button::before {
+                top: 0;
+                left: 0;
 
-                top:
-                    0;
+                width: 100vw;
+                height: 82px;
 
-                left:
-                    0;
-
-                width:
-                    100vw;
-
-                height:
-                    82px;
-
-                background:
-                    #eef6fc;
-
+                background: #eef6fc;
             }
 
-
             .menu-button::after {
+                top: 82px;
+                left: 0;
 
-                top:
-                    82px;
-
-                left:
-                    0;
-
-                width:
-                    100vw;
-
-                height:
-                    30px;
+                width: 100vw;
+                height: 30px;
 
                 background:
                     linear-gradient(
                         to bottom,
-
                         #eef6fc,
-
-                        rgba(
-                            238,
-                            246,
-                            252,
-                            0
-                        )
+                        rgba(238, 246, 252, 0)
                     );
-
             }
 
 
             /* =============================================
-               MOBILE X
+               MOBILE HAMBURGER → X
             ============================================== */
 
-            .menu-button.active
-            span:nth-child(1) {
-
+            .menu-button.active span:nth-child(1) {
                 transform:
                     translateY(13px)
                     rotate(45deg);
-
             }
 
-
-            .menu-button.active
-            span:nth-child(3) {
-
+            .menu-button.active span:nth-child(3) {
                 transform:
                     translateY(-13px)
                     rotate(-45deg);
-
             }
-
-
-            /* =============================================
-               MOBILE - MENU TERBUKA
-            ============================================== */
 
             .menu-button.active::before,
             .menu-button.active::after {
-
-                opacity:
-                    0;
-
-                visibility:
-                    hidden;
-
-            }
-
-
-            /* =============================================
-               VIDEO
-            ============================================== */
-
-            .video-container {
-
-                width:
-                    min(
-                        75vw,
-                        360px
-                    );
-
-                height:
-                    auto;
-
-                aspect-ratio:
-                    9 / 16;
-
-            }
-
-
-            /* =============================================
-               INFO PANEL
-            ============================================== */
-
-            .info-panel {
-
-                width:
-                    100%;
-
-                height:
-                    auto;
-
-                min-height:
-                    620px;
-
-                padding:
-                    40px 30px 105px;
-
-                border-radius:
-                    24px;
-
-            }
-
-
-            /* =============================================
-               TITLE
-            ============================================== */
-
-            .info-title {
-
-                font-size:
-                    clamp(
-                        36px,
-                        10vw,
-                        55px
-                    );
-
-                letter-spacing:
-                    -2px;
-
-                line-height:
-                    0.88;
-
-                margin-bottom:
-                    3px;
-
-            }
-
-
-            /* =============================================
-               TAGLINE
-            ============================================== */
-
-            .info-tagline {
-
-                font-size:
-                    clamp(
-                        25px,
-                        7vw,
-                        38px
-                    );
-
-                line-height:
-                    0.92;
-
-                margin-bottom:
-                    25px;
-
-            }
-
-
-            /* =============================================
-               DESCRIPTION
-            ============================================== */
-
-            .info-description {
-
-                font-size:
-                    16px;
-
-                line-height:
-                    1.6;
-
-                text-align:
-                    left;
-
-            }
-
-
-            /* =============================================
-               BACK BUTTON
-            ============================================== */
-
-            .back-button {
-
-                right:
-                    25px;
-
-                bottom:
-                    25px;
-
-                min-width:
-                    190px;
-
-                min-height:
-                    55px;
-
-                font-size:
-                    14px;
-
-                letter-spacing:
-                    4px;
-
+                opacity: 0;
+                visibility: hidden;
             }
 
 
@@ -1642,69 +914,35 @@
             ============================================== */
 
             .side-menu {
-
-                width:
-                    310px;
-
-                max-width:
-                    82vw;
-
+                width: 310px;
+                max-width: 82vw;
             }
-
 
             .side-menu::before {
-
-                height:
-                    110px;
-
+                height: 110px;
             }
-
 
             .side-menu::after {
-
-                top:
-                    88px;
-
-                height:
-                    40px;
-
+                top: 88px;
+                height: 40px;
             }
-
 
             .side-menu-content {
+                width: 78%;
 
-                width:
-                    78%;
+                height: 100%;
+                max-height: 100vh;
 
-                height:
-                    100%;
+                padding-top: 120px;
+                padding-left: 0;
+                padding-right: 0;
+                padding-bottom: 40px;
 
-                max-height:
-                    100vh;
-
-                padding-top:
-                    120px;
-
-                padding-left:
-                    0;
-
-                padding-right:
-                    0;
-
-                padding-bottom:
-                    40px;
-
-                margin-left:
-                    38px;
-
+                margin-left: 38px;
             }
 
-
             .side-menu-content a {
-
-                font-size:
-                    17px;
-
+                font-size: 17px;
             }
 
         }
@@ -1717,174 +955,53 @@
         @media (max-width: 400px) {
 
             .about-page {
-
-                padding:
-                    90px 15px 35px;
-
+                padding: 90px 15px 35px;
             }
-
-
-            .video-container {
-
-                width:
-                    80vw;
-
-            }
-
 
             .info-panel {
-
-                padding:
-                    30px 25px 90px;
-
+                padding: 25px 20px 22px;
             }
-
-
-            .info-title {
-
-                font-size:
-                    34px;
-
-            }
-
-
-            .info-tagline {
-
-                font-size:
-                    25px;
-
-            }
-
 
             .info-description {
-
-                font-size:
-                    15px;
-
+                font-size: 15px;
             }
 
-
-            .back-button {
-
-                right:
-                    20px;
-
-                bottom:
-                    20px;
-
-                min-width:
-                    175px;
-
-                font-size:
-                    13px;
-
+            .page-button {
+                font-size: 13px;
             }
-
 
             .side-menu {
-
-                width:
-                    85vw;
-
+                width: 85vw;
             }
-
 
             .side-menu::before {
-
-                height:
-                    100px;
-
+                height: 100px;
             }
-
 
             .side-menu::after {
-
-                top:
-                    80px;
-
-                height:
-                    35px;
-
+                top: 80px;
+                height: 35px;
             }
-
 
             .side-menu-content {
+                width: 82%;
 
-                width:
-                    82%;
+                padding-top: 110px;
+                padding-bottom: 35px;
 
-                padding-top:
-                    110px;
-
-                padding-bottom:
-                    35px;
-
-                margin-left:
-                    30px;
-
+                margin-left: 30px;
             }
-
 
             .side-menu-content a {
-
-                font-size:
-                    16px;
-
+                font-size: 16px;
             }
-
 
             .menu-section-title {
-
-                font-size:
-                    11px;
-
+                font-size: 11px;
             }
 
         }
 
-
-        /* Landscape video */
-        .about-page {
-            align-items: safe center;
-        }
-
-        .video-container {
-            flex: 0 0 48%;
-            width: 48%;
-            max-width: 760px;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            background: #000;
-        }
-
-        .video-container video {
-            object-fit: contain;
-        }
-
-        .info-panel {
-            height: auto;
-        }
-
-        @media (max-width: 900px) {
-            .about-page {
-                flex-direction: column;
-                justify-content: flex-start;
-                gap: 24px;
-                padding-top: 100px;
-                padding-bottom: 40px;
-            }
-
-            .video-container,
-            .info-panel {
-                flex: 0 0 auto;
-                width: 100%;
-                max-width: 760px;
-            }
-
-            .info-panel {
-                min-height: 0;
-            }
-        }
     </style>
 
 </head>
@@ -1920,45 +1037,24 @@
 
 
         <!-- =================================================
-             VIDEO
-        ================================================== -->
-
-        <div class="video-container">
-
-            <video
-                controls
-                playsinline
-                preload="metadata"
-            >
-
-                <source
-                    src="assets/tentang.MOV"
-                    type="video/mp4"
-                >
-
-                Browser Anda tidak mendukung
-                pemutaran video.
-
-            </video>
-
-        </div>
-
-
-        <!-- =================================================
              INFORMATION PANEL
         ================================================== -->
 
-        <section class="info-panel">
+        <section
+            class="info-panel"
+            aria-labelledby="infoTitle"
+        >
 
 
             <!-- =============================================
                  MAIN TITLE
             ============================================== -->
 
-            <h1 class="info-title">
-
+            <h1
+                class="info-title"
+                id="infoTitle"
+            >
                 CTRL + MEASURE
-
             </h1>
 
 
@@ -1977,35 +1073,124 @@
                  DESCRIPTION
             ============================================== -->
 
-            <p class="info-description" style="margin-bottom: 10px;">
-                Ever wondered what makes you, <i>you</i>?
-            </p>
+            <div class="info-copy">
 
-            <p class="info-description" style="margin-bottom: 10px;">
-                Welcome to <i><b>CTRL + MEASURE</b></i>! Kenali berbagai alat ukur psikologis, temukan hal-hal menarik di baliknya, dan lihat bagaimana angka bisa membantu kita memahami keunikan setiap individu. <i><b>Because we're more than just numbers!</b></i>
-            </p>
 
-            <p class="info-description" style="margin-bottom: 10px;">
-                <b>Disclaimer:</b> Website ini hanya digunakan untuk tujuan pembelajaran. Alat ukur yang ditampilkan tidak untuk diagnosis atau penilaian profesional. Please use responsibly and don't misuse them!
-            </p>
+                <!-- INTRO -->
 
+                <p class="info-description intro">
+
+                    Ever wondered what makes you, <em>you</em>?
+
+                </p>
+
+
+                <!-- WELCOME -->
+
+                <p class="info-description intro">
+
+                    Welcome to <strong>CTRL + MEASURE!</strong>
+
+                </p>
+
+
+                <!-- FILOSOFI JUDUL -->
+
+                <p class="info-description">
+
+                    Terinspirasi dari tombol CTRL pada keyboard,
+                    CTRL juga merepresentasikan makna control,
+                    yaitu pentingnya proses pengukuran psikologis
+                    yang sistematis, terstandar, dan dapat
+                    dipertanggungjawabkan.
+
+                </p>
+
+
+                <!-- FILOSOFI TAGLINE -->
+
+                <p class="info-description">
+
+                    Melalui tagline “Measuring What Makes Us, Us.”,
+                    kami ingin menunjukkan bahwa di balik setiap angka,
+                    terdapat karakteristik, kecenderungan, dan
+                    keunikan yang membentuk diri seseorang.
+
+                </p>
+
+
+                <!-- AJAKAN -->
+
+                <p class="info-description">
+
+                    Mari kenali berbagai alat ukur psikologis
+                    dan temukan bagaimana angka membantu kita
+                    memahami keunikan setiap individu.
+
+                    <strong>Because we're more than just numbers!</strong>
+
+                </p>
+
+
+                <!-- DISCLAIMER -->
+
+                <p class="info-description">
+
+                    <strong>Disclaimer:</strong>
+
+                    Website ini hanya digunakan untuk tujuan pembelajaran.
+                    Alat ukur yang ditampilkan dapat diakses secara gratis
+                    melalui PsycNET (per tahun 2026) dan digunakan sebatas
+                    keperluan tugas perkuliahan, bukan untuk diagnosis
+                    atau penilaian profesional.
+
+                    <em>Please respect the intended purpose of these psychological measures.</em>
+
+                </p>
+
+
+            </div>
 
 
             <!-- =============================================
-                 BACK BUTTON
+                 NAVIGATION BUTTONS
             ============================================== -->
 
-            <a
-                href="index.html"
-                class="back-button"
+            <nav
+                class="page-actions"
+                aria-label="Navigasi halaman"
             >
 
-                KEMBALI
 
-            </a>
+                <!-- KEMBALI -->
+
+                <a
+                    href="index.html"
+                    class="page-button back-button"
+                >
+
+                    KEMBALI
+
+                </a>
+
+
+                <!-- EXPLORE -->
+
+                <a
+                    href="menu.html"
+                    class="page-button explore-button"
+                >
+
+                    EXPLORE
+
+                </a>
+
+
+            </nav>
 
 
         </section>
+
 
     </main>
 
@@ -2030,9 +1215,7 @@
         aria-hidden="true"
     >
 
-        <nav
-            class="side-menu-content"
-        >
+        <nav class="side-menu-content">
 
 
             <!-- =============================================
@@ -2049,7 +1232,11 @@
             </a>
 
 
-            <a href="tentang.html" class="current-page" aria-current="page">
+            <a
+                href="tentang.html"
+                class="current-page"
+                aria-current="page"
+            >
                 Tentang Exhibition
             </a>
 
@@ -2062,6 +1249,7 @@
             <a href="profil-asisten.html">
                 Profil Asisten
             </a>
+
 
             <a href="menu.html">
                 Our Theme
@@ -2076,29 +1264,36 @@
                 TEMA
             </div>
 
+
             <a href="relationship.html">
                 Relationship
             </a>
+
 
             <a href="selfesteem.html">
                 Self-Esteem and Self-Concept
             </a>
 
+
             <a href="body-perception-and-lifstyle-behaviours.html">
                 Body Perception and Lifestyle Behaviors
             </a>
+
 
             <a href="digital-behaviour.html">
                 Digital Behavior
             </a>
 
+
             <a href="academic-cognitive-and-career-processes.html">
                 Academic, Cognitive and Career Processes
             </a>
 
+
             <a href="psychological-wellbeing.html">
                 Psychologicall Well-Being
             </a>
+
 
             <!-- =============================================
                  PARTICIPATE
@@ -2131,83 +1326,57 @@
         ====================================================== */
 
         const menuButton =
-            document.getElementById(
-                "menuButton"
-            );
-
+            document.getElementById("menuButton");
 
         const sideMenu =
-            document.getElementById(
-                "sideMenu"
-            );
-
+            document.getElementById("sideMenu");
 
         const overlay =
-            document.getElementById(
-                "overlay"
-            );
-
+            document.getElementById("overlay");
 
         const aboutPage =
-            document.querySelector(
-                ".about-page"
-            );
+            document.querySelector(".about-page");
 
 
         /* =====================================================
            COLLISION DETECTION
-           
-           Mengecek apakah video / info panel sedang
-           masuk ke area hamburger.
+
+           Mengecek apakah information panel masuk
+           ke protected area hamburger ketika scrolling.
         ====================================================== */
 
         function checkHamburgerCollision() {
 
-            /* ---------------------------------------------
-               Kalau menu sedang terbuka,
-               efek protected area harus hilang.
-            ---------------------------------------------- */
 
-            if (
-                sideMenu.classList.contains(
-                    "active"
-                )
-            ) {
+            /* =============================================
+               MENU SEDANG TERBUKA
+            ============================================== */
 
-                menuButton.classList.remove(
-                    "is-obscured"
-                );
+            if (sideMenu.classList.contains("active")) {
+
+                menuButton.classList.remove("is-obscured");
 
                 return;
 
             }
 
 
-            /* ---------------------------------------------
-               Kalau belum scroll,
-               efek tidak perlu muncul.
-            ---------------------------------------------- */
+            /* =============================================
+               BELUM SCROLL
+            ============================================== */
 
-            if (
-                !aboutPage ||
-                aboutPage.scrollTop <= 5
-            ) {
+            if (!aboutPage || aboutPage.scrollTop <= 5) {
 
-                menuButton.classList.remove(
-                    "is-obscured"
-                );
+                menuButton.classList.remove("is-obscured");
 
                 return;
 
             }
 
 
-            /* ---------------------------------------------
-               Tinggi area hamburger.
-
-               Desktop = 105px
-               Mobile  = 82px
-            ---------------------------------------------- */
+            /* =============================================
+               PROTECTED AREA
+            ============================================== */
 
             const protectedTop = 0;
 
@@ -2217,58 +1386,48 @@
                     : 105;
 
 
-            /* ---------------------------------------------
-               Elemen yang perlu diperiksa
-            ---------------------------------------------- */
+            /* =============================================
+               ELEMENTS TO CHECK
+            ============================================== */
 
             const contentElements =
-                aboutPage.querySelectorAll(
-                    ".video-container, .info-panel"
-                );
-
+                aboutPage.querySelectorAll(".info-panel");
 
             let collision = false;
 
 
-            /* ---------------------------------------------
-               Deteksi collision
-            ---------------------------------------------- */
+            /* =============================================
+               DETEKSI COLLISION
+            ============================================== */
 
-            contentElements.forEach(
-                function (element) {
+            contentElements.forEach(function (element) {
 
-                    const rect =
-                        element.getBoundingClientRect();
+                const rect =
+                    element.getBoundingClientRect();
 
+                if (
+                    rect.top < protectedBottom &&
+                    rect.bottom > protectedTop
+                ) {
 
-                    if (
-                        rect.top < protectedBottom &&
-                        rect.bottom > protectedTop
-                    ) {
-
-                        collision = true;
-
-                    }
+                    collision = true;
 
                 }
-            );
+
+            });
 
 
-            /* ---------------------------------------------
-               Tampilkan / sembunyikan protected area
-            ---------------------------------------------- */
+            /* =============================================
+               TAMPILKAN / SEMBUNYIKAN PROTECTED AREA
+            ============================================== */
 
             if (collision) {
 
-                menuButton.classList.add(
-                    "is-obscured"
-                );
+                menuButton.classList.add("is-obscured");
 
             } else {
 
-                menuButton.classList.remove(
-                    "is-obscured"
-                );
+                menuButton.classList.remove("is-obscured");
 
             }
 
@@ -2281,28 +1440,13 @@
 
         function openMenu() {
 
-            menuButton.classList.add(
-                "active"
-            );
+            menuButton.classList.add("active");
 
+            menuButton.classList.remove("is-obscured");
 
-            /* ---------------------------------------------
-               Pastikan efek collision langsung hilang
-            ---------------------------------------------- */
+            sideMenu.classList.add("active");
 
-            menuButton.classList.remove(
-                "is-obscured"
-            );
-
-
-            sideMenu.classList.add(
-                "active"
-            );
-
-
-            overlay.classList.add(
-                "active"
-            );
+            overlay.classList.add("active");
 
 
             sideMenu.setAttribute(
@@ -2310,12 +1454,10 @@
                 "false"
             );
 
-
             menuButton.setAttribute(
                 "aria-expanded",
                 "true"
             );
-
 
             menuButton.setAttribute(
                 "aria-label",
@@ -2323,9 +1465,7 @@
             );
 
 
-            document.body.classList.add(
-                "menu-open"
-            );
+            document.body.classList.add("menu-open");
 
         }
 
@@ -2336,19 +1476,11 @@
 
         function closeMenu() {
 
-            menuButton.classList.remove(
-                "active"
-            );
+            menuButton.classList.remove("active");
 
+            sideMenu.classList.remove("active");
 
-            sideMenu.classList.remove(
-                "active"
-            );
-
-
-            overlay.classList.remove(
-                "active"
-            );
+            overlay.classList.remove("active");
 
 
             sideMenu.setAttribute(
@@ -2356,12 +1488,10 @@
                 "true"
             );
 
-
             menuButton.setAttribute(
                 "aria-expanded",
                 "false"
             );
-
 
             menuButton.setAttribute(
                 "aria-label",
@@ -2369,14 +1499,12 @@
             );
 
 
-            document.body.classList.remove(
-                "menu-open"
-            );
+            document.body.classList.remove("menu-open");
 
 
-            /* ---------------------------------------------
-               Cek kembali apakah content sedang bertabrakan
-            ---------------------------------------------- */
+            /* =============================================
+               CEK KEMBALI COLLISION
+            ============================================== */
 
             setTimeout(
                 checkHamburgerCollision,
@@ -2396,11 +1524,7 @@
                 "click",
                 function () {
 
-                    if (
-                        sideMenu.classList.contains(
-                            "active"
-                        )
-                    ) {
+                    if (sideMenu.classList.contains("active")) {
 
                         closeMenu();
 
@@ -2435,25 +1559,20 @@
         ====================================================== */
 
         const menuLinks =
-            document.querySelectorAll(
-                ".side-menu a"
+            document.querySelectorAll(".side-menu a");
+
+        menuLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    closeMenu();
+
+                }
             );
 
-
-        menuLinks.forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        closeMenu();
-
-                    }
-                );
-
-            }
-        );
+        });
 
 
         /* =====================================================
@@ -2491,16 +1610,9 @@
             "keydown",
             function (event) {
 
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
+                if (event.key === "Escape") {
 
-                    if (
-                        sideMenu.classList.contains(
-                            "active"
-                        )
-                    ) {
+                    if (sideMenu.classList.contains("active")) {
 
                         closeMenu();
 
